@@ -5,6 +5,10 @@ function Entity(game, pos, dim) {
     this.w = dim.w;
     this.h = dim.h;
     this.removeFromWorld = false;
+
+    console.log("Created as " + pos + " | " + dim);
+
+    console.log(this.x);
 }
 
 Entity.prototype.collide = function(otherEntity) {

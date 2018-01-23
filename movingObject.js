@@ -8,16 +8,21 @@ function movingObject(game, pos, radius, img, imgDims) {
     this.yVel = 0;
     this.angle = 0;
 
+    this.radius = radius;
+
     this.imageCache = buildRotatedCache(img, imgDims);
 
     console.log("Making our moving object.");
 
-    Entity.call(this, game, pos, [radius, radius]);
+    Entity.call(this, game, pos, {w: radius * 2, h: radius * 2});
 
     console.log("Called ctor and made it out successfully?");
 }
 
-Entity.prototype.collide = function(otherEntity) {
+movingObject.prototype = new Entity(null, [0,0], [0,0]);
+movingObject.prototype.constructor = movingObject;
+
+movingObject.prototype.collide = function(otherEntity) {
     if (otherEntity.radius) {
         deltaX = otherEntity.x - this.x;
         deltaY = otherEntity.y - this.y;
@@ -29,16 +34,11 @@ Entity.prototype.collide = function(otherEntity) {
 }
 
 movingObject.prototype.update = function () {
-    this.x += this.xVel * game.clockTick;
-    this.y += this.yVel * game.clockTick;
+    this.x += this.xVel * this.game.clockTick;
+    this.y += this.yVel * this.game.clockTick;
 
-    console.log(x, y);
-
-    Entity.prototype.collide.call(this, otherEntity);
+    Entity.prototype.update.call(this);
 }
-
-movingObject.prototype = new Entity(null, [0,0], [0,0]);
-movingObject.prototype.constructor = movingObject;
 
 movingObject.prototype.draw = function (ctx) {
 
