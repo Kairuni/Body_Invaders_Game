@@ -5,10 +5,6 @@ function Entity(game, pos, dim) {
     this.w = dim.w;
     this.h = dim.h;
     this.removeFromWorld = false;
-
-    console.log("Created as " + pos + " | " + dim);
-
-    console.log(this.x);
 }
 
 Entity.prototype.collide = function(otherEntity) {
@@ -30,18 +26,18 @@ Entity.prototype.draw = function (ctx) {
     if (this.game.showOutlines) {
         //ctx.fillStyle = "Green";
         ctx.strokeStyle = "Green";
-        ctx.strokeRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
+        ctx.strokeRect(Math.floor(this.x) - this.w/2, Math.floor(this.y) - this.h/2, this.w, this.h);
     }
     if (this.game.showOutlines && this.radius) {
         this.game.ctx.beginPath();
-        ctx.strokeStyle = "Yellow";
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        ctx.strokeStyle = "Orange";
+        ctx.arc(Math.floor(this.x), Math.floor(this.y), this.radius, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.closePath();
     }
 }
 
-Entity.prototype.rotateAndCache = function (image, angle, pos, dim) {
+Entity.prototype.rotateAndCache = function (image, angle, pos = null, dim = null) {
     var offscreenCanvas = document.createElement('canvas');
     var size = Math.max(image.width, image.height);
     offscreenCanvas.width = size;

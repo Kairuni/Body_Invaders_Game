@@ -33,7 +33,7 @@ function GameEngine() {
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
-    this.mouse = null;
+    this.mouse = {x: 0, y: 0};
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
@@ -61,10 +61,41 @@ GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
 
+    var getXandY = function (e) {
+        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+
+        return { x: x, y: y };
+    }
+
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (String.fromCharCode(e.which) === ' ') that.space = true;
-//        console.log(e);
+        else if (String.fromCharCode(e.which) === 'W') that.up = true;
+        else if (String.fromCharCode(e.which) === 'A') that.left = true;
+        else if (String.fromCharCode(e.which) === 'S') that.down = true;
+        else if (String.fromCharCode(e.which) === 'D') that.right = true;
+        //console.log(String.fromCharCode(e.which));
+        //console.log(e);
+        //console.log(that.up);
         e.preventDefault();
+    }, false);
+
+    this.ctx.canvas.addEventListener("keyup", function (e) {
+        if (String.fromCharCode(e.which) === ' ') that.space = false;
+        else if (String.fromCharCode(e.which) === 'W') that.up = false;
+        else if (String.fromCharCode(e.which) === 'A') that.left = false;
+        else if (String.fromCharCode(e.which) === 'S') that.down = false;
+        else if (String.fromCharCode(e.which) === 'D') that.right = false;
+        //console.log(String.fromCharCode(e.which));
+        //console.log(e);
+        //console.log(that.up);
+        e.preventDefault();
+    }, false);
+
+
+    this.ctx.canvas.addEventListener("mousemove", function (e) {
+        that.mouse = getXandY(e);
+        //console.log(e);
     }, false);
 
     console.log('Input started');
@@ -92,14 +123,17 @@ GameEngine.prototype.update = function () {
 
         if (!entity.removeFromWorld) {
             entity.update();
+        } else {
+            this.entities.splice(i, 1);
+            i--;
+            entitiesCount--;
         }
     }
-
-    for (var i = this.entities.length - 1; i >= 0; --i) {
+    /*for (var i = this.entities.length - 1; i >= 0; --i) {
         if (this.entities[i].removeFromWorld) {
             this.entities.splice(i, 1);
         }
-    }
+    }*/
 }
 
 GameEngine.prototype.loop = function () {
