@@ -10,9 +10,7 @@ Background.prototype.update = function () {
 }
 
 Background.prototype.draw = function (ctx) {
-    ctx.fillStyle = "rgb(0,0,0)";
-    ctx.fillRect(0,0,1200,800);
-    Entity.prototype.draw.call(this);
+    ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground.png"), 0, 0);
 }
 
 // the "main" code begins here
@@ -20,6 +18,7 @@ Background.prototype.draw = function (ctx) {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./assets/Units/Allies.png");
+ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
