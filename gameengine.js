@@ -30,6 +30,7 @@ Timer.prototype.tick = function () {
 
 function GameEngine() {
     this.entities = [];
+    this.staticEntities = [];
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
@@ -41,6 +42,9 @@ function GameEngine() {
 
 GameEngine.prototype.init = function (ctx) {
     this.ctx = ctx;
+
+    ctx.imageSmoothingEnabled = false;
+
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
     this.startInput();
@@ -98,6 +102,14 @@ GameEngine.prototype.startInput = function () {
         //console.log(e);
     }, false);
 
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
+        that.click = true;
+    }, false);
+
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        that.click = false;
+    }, false);
+
     console.log('Input started');
 }
 
@@ -106,9 +118,17 @@ GameEngine.prototype.addEntity = function (entity) {
     this.entities.push(entity);
 }
 
+GameEngine.prototype.addStaticEntity = function (entity) {
+    console.log('added static entity');
+    this.entities.push(entity);
+}
+
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.save();
+    for (var i = 0; i < this.staticEntities.length; i++) {
+        this.staticEntities[i].draw(this.ctx);
+    }
     for (var i = 0; i < this.entities.length; i++) {
         this.entities[i].draw(this.ctx);
     }
@@ -124,6 +144,8 @@ GameEngine.prototype.update = function () {
         if (!entity.removeFromWorld) {
             entity.update();
         } else {
+            if (this.partitioner)
+                this.partitioner.removeFromGrid(entity, entity.entityType);
             this.entities.splice(i, 1);
             i--;
             entitiesCount--;

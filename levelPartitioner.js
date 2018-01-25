@@ -15,8 +15,8 @@ class levelPartitioner {
         var bounds = {
             x1: Math.floor((entity.x - (entity.w / 2)) / this.gridSize),
             x2: Math.floor((entity.x + (entity.w / 2)) / this.gridSize),
-            y1: Math.floor((entity.y - (entity.y / 2)) / this.gridSize),
-            y2: Math.floor((entity.y + (entity.y / 2)) / this.gridSize)
+            y1: Math.floor((entity.y - (entity.h / 2)) / this.gridSize),
+            y2: Math.floor((entity.y + (entity.h / 2)) / this.gridSize)
         };
 
         // Limit the box to 'within the grid.'
@@ -57,6 +57,9 @@ class levelPartitioner {
         var ships = type === 1;
         var bullets = type === 2;
 
+        if (type === 0)
+            console.log(bounds);
+
         for (var x = bounds.x1; x <= bounds.x2; x++) {
             for (var y = bounds.y1; y <= bounds.y2; y++) {
                 //console.log(x + " | " + y);
@@ -68,6 +71,7 @@ class levelPartitioner {
                 } else if (bullets) {
                     this.grid[x][y].bullets.push(entity);
                 } else if (walls) {
+                    console.log("Added a wall to the grid.");
                     this.grid[x][y].walls.push(entity);
                 }
             }
@@ -76,7 +80,7 @@ class levelPartitioner {
 
     // Test for collisions.
     // Returns: map of collisions for each entity class.
-    testCollide(entity) {
+    testCollide(entity, test = {ship: true, wall: true, bullet: true}) {
         var bounds = this.getBounds(entity);
 
         var collisions = {
@@ -98,13 +102,13 @@ class levelPartitioner {
                 var walls = this.grid[x][y].walls;
 
                 for (var i = 0; i < Math.max(ships.length, bullets.length, walls.length); i++) {
-                    if (i < ships.length && i < ships[i].collide(entity) && collisions.ship.indexOf(ships[i]) == -1) {
+                    if (test.ship && i < ships.length && i < ships[i].collide(entity) && collisions.ship.indexOf(ships[i]) == -1) {
                         collisions.ship.push(ships[i]);
                     }
-                    if (i < walls.length && i < walls[i].collide(entity) && collisions.wall.indexOf(walls[i]) == -1) {
+                    if (test.wall && i < walls.length && i < walls[i].collide(entity) && collisions.wall.indexOf(walls[i]) == -1) {
                         collisions.wall.push(walls[i]);
                     }
-                    if (i < bullets.length && i < bullets[i].collide(entity) && collisions.bullet.indexOf(bullets[i]) == -1) {
+                    if (test.bullet && i < bullets.length && i < bullets[i].collide(entity) && collisions.bullet.indexOf(bullets[i]) == -1) {
                         collisions.bullet.push(bullets[i]);
                     }
                 }

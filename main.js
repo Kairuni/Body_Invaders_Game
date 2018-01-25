@@ -11,7 +11,7 @@ Background.prototype.update = function () {
 
 Background.prototype.draw = function (ctx) {
     ctx.fillStyle = "rgb(0,0,0)";
-    ctx.fillRect(0,0,800,800);
+    ctx.fillRect(0,0,1200,800);
     Entity.prototype.draw.call(this);
 }
 
@@ -19,7 +19,7 @@ Background.prototype.draw = function (ctx) {
 
 var ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./img/RobotUnicorn.png");
+ASSET_MANAGER.queueDownload("./assets/Units/Allies.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -30,27 +30,29 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.partitioner = new levelPartitioner({x: 1000, y: 1000}, 20);
 
     var bg = new Background(gameEngine, {x: 0, y: 0}, {w: 0, h: 0});
+    gameEngine.addStaticEntity(bg);
 
-    var movable = new movingObject(gameEngine, {x: 0, y: 290}, 25, 0, {w: 0, h: 0});
-    var movable2 = new movingObject(gameEngine, {x: 0, y: 300}, 25, 0, {w: 0, h: 0});
-    var movable3 = new movingObject(gameEngine, {x: 0, y: 310}, 25, 0, {w: 0, h: 0});
-    var playerShip = new Ship(gameEngine, {x: 200, y: 300}, 30, 0, {w: 0, h: 0})
+    // These add themselves to the game engine, no need to call addStaticEntity or addEntity
+    var topWall = new Wall(gameEngine, {x: 500, y: -10}, {w: 1200, h: 30}, null);
+    var botWall = new Wall(gameEngine, {x: 500, y: 790}, {w: 1200, h: 30}, null);
+    var leftWall = new Wall(gameEngine, {x: 0, y: 400}, {w: 30, h: 1200}, null);
+    var rightWall = new Wall(gameEngine, {x: 1000, y: 400}, {w: 30, h: 1200}, null);
 
-    movable.xVel = 20;
-    movable.yVel = -5;
-    movable.angle = -3.14/10;
-    movable2.xVel = 20;
-    movable3.xVel = 20;
-    movable3.yVel = 5;
-    movable3.angle = 3.14/10;
+    var RBC = new redBloodCell(gameEngine, {x: 100, y: 280}, 25);
+    var WBC = new whiteBloodCell(gameEngine, {x: 100, y: 300}, 25);
+    var RBC2 = new redBloodCell(gameEngine, {x: 100, y: 320}, 25);
+    var playerShip = new Ship(gameEngine, {x: 200, y: 300})
+
+    RBC.xVel = 20;
+    RBC.yVel = -5;
+    RBC.angle = -3.14/10;
+    WBC.xVel = 20;
+    RBC2.xVel = 20;
+    RBC2.yVel = 5;
+    RBC2.angle = 3.14/10;
 
     gameEngine.showOutlines = true;
 
-    gameEngine.addEntity(bg);
-    gameEngine.addEntity(movable);
-    gameEngine.addEntity(movable2);
-    gameEngine.addEntity(movable3);
-    gameEngine.addEntity(playerShip);
 
     gameEngine.init(ctx);
     gameEngine.start();
