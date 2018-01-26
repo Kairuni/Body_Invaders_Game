@@ -1,4 +1,4 @@
-const BPHAGE_RADIUS = 80;
+const BPHAGE_RADIUS = 75;
 
 class Bacteriophage extends movingObject {
     constructor(game, pos) {
@@ -6,8 +6,11 @@ class Bacteriophage extends movingObject {
 
         this.hp = 160;
 
-        //var image = ASSET_MANAGER.getAsset("./assets/Units/Enemies.png");
-        //this.anim = new Animation(image, 0, 0, 200, 200, 0.25, 4, true, false);
+        this.topDownSprites = buildRotatedCache("./assets/Units/Enemies.png", {x: 0, y: 0, w: 150, h: 150}, 4);
+        this.animFrames = 4;
+        this.animFrameDuration = .10;
+        this.animElapsedTimer = 0;
+        this.animTime = this.animFrameDuration * this.animFrames;
 
         this.myBullet = null;
         this.myBulletReset = 0;
@@ -17,20 +20,36 @@ class Bacteriophage extends movingObject {
     }
 
     draw(ctx) {
-        //this.anim.drawFrame(this.game.clockTick, ctx, this.x - 50, this.y - 50);
+        var cAngle = Math.round(this.angle * (18 / 3.1415));
+        cAngle += 9 + 18;
+        cAngle = cAngle % 36;
+        if (cAngle < 0)
+            cAngle += 36;
+
+        var animFrame = Math.floor(this.animElapsedTimer/this.animFrameDuration);
+
+        //console.log(animFrame);
+        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.x - this.radius - ROTATION_BUFFER, this.y - this.radius - ROTATION_BUFFER);
+
+        this.animElapsedTimer += this.game.clockTick;
+
+        if (this.animElapsedTimer > this.animTime)
+            this.animElapsedTimer -= this.animTime;
+
         super.draw(ctx);
     }
+
 
     update() {
         var pPos = this.game.playerPosition;
 
-        this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2);
+        this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2) ;
 
         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 80 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
             this.myBullet = new Bullet(this.game, bulletPos,
-                                    this.angle, 0, 40, 0,
+                                    this.angle, 0, 25, 0,
                                     {x: 0, y: 0, w: 0, h: 0}, this, 20);
             this.myBulletReset = this.myBulletTime;
         } else if (this.myBullet != null) {

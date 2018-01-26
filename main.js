@@ -18,6 +18,7 @@ Background.prototype.draw = function (ctx) {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./assets/Units/Allies.png");
+ASSET_MANAGER.queueDownload("./assets/Units/Enemies.png");
 ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground.png");
 
 ASSET_MANAGER.downloadAll(function () {
