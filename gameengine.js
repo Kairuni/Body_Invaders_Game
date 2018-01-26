@@ -73,27 +73,25 @@ GameEngine.prototype.startInput = function () {
     }
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (String.fromCharCode(e.which) === ' ') that.space = true;
-        else if (String.fromCharCode(e.which) === 'W') that.up = true;
+        if (String.fromCharCode(e.which) === 'W') that.up = true;
         else if (String.fromCharCode(e.which) === 'A') that.left = true;
         else if (String.fromCharCode(e.which) === 'S') that.down = true;
         else if (String.fromCharCode(e.which) === 'D') that.right = true;
         //console.log(String.fromCharCode(e.which));
         //console.log(e);
         //console.log(that.up);
-        e.preventDefault();
+        //e.preventDefault();
     }, false);
 
     this.ctx.canvas.addEventListener("keyup", function (e) {
-        if (String.fromCharCode(e.which) === ' ') that.space = false;
-        else if (String.fromCharCode(e.which) === 'W') that.up = false;
+        if (String.fromCharCode(e.which) === 'W') that.up = false;
         else if (String.fromCharCode(e.which) === 'A') that.left = false;
         else if (String.fromCharCode(e.which) === 'S') that.down = false;
         else if (String.fromCharCode(e.which) === 'D') that.right = false;
         //console.log(String.fromCharCode(e.which));
         //console.log(e);
         //console.log(that.up);
-        e.preventDefault();
+        //e.preventDefault();
     }, false);
 
 
@@ -151,11 +149,6 @@ GameEngine.prototype.update = function () {
             entitiesCount--;
         }
     }
-    /*for (var i = this.entities.length - 1; i >= 0; --i) {
-        if (this.entities[i].removeFromWorld) {
-            this.entities.splice(i, 1);
-        }
-    }*/
 }
 
 GameEngine.prototype.loop = function () {

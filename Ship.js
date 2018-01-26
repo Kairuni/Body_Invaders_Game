@@ -1,3 +1,5 @@
+// LOTS OF MAGIC NUMBER, fix that.
+
 // The player ship, so this is all kinda set.
 function Ship(game, pos) {
     this.hp = 100;
@@ -44,7 +46,14 @@ Ship.prototype.update = function () {
 
     if (this.fireTimer <= 0) {
         if (this.game.click) {
-            var myBullet = new Bullet(this.game, {x: this.x, y: this.y}, this.angle, 400, 20, 0, {x: 0, y: 0, w: 0, h: 0}, this);
+            var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle - (3.1415/4)),
+                                                    y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
+                                                    this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                    {x: 0, y: 0, w: 0, h: 0}, this, 2);
+            var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle + (3.1415/4)),
+                                                    y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
+                                                    this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                    {x: 0, y: 0, w: 0, h: 0}, this, 2);
             this.fireTimer = this.fireRate;
         }
     }
@@ -68,5 +77,6 @@ Ship.prototype.draw = function (ctx) {
 
     if (this.animElapsedTimer > this.animTime)
         this.animElapsedTimer -= this.animTime;
-    //movingObject.prototype.draw.call(this, ctx);
+        
+    movingObject.prototype.draw.call(this, ctx);
 }

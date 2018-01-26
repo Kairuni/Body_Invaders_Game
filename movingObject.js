@@ -49,7 +49,7 @@ movingObject.prototype.update = function (colTest = {ship: true, wall: true, bul
 
     // If colliding, set this flag for debug drawing.
     this.colliding = false;
-    if (collisions.ship.length > 0 || collisions.wall.length > 0 || collisions.bullet.length > 0)
+    if (collisions.ship.length > 0 || collisions.wall.length > 0 || (collisions.bullet.length > 0 && collisions.bullet[0].owner != this))
         this.colliding = true;
 
     this.handleCollisions(collisions);
@@ -102,7 +102,7 @@ movingObject.prototype.handleCollisions = function(collisions) {
 
 movingObject.prototype.destroy = function() {
     this.removeFromWorld = true;
-    this.game.partitioner.removeFromGrid(this, this.entityType);    
+    this.game.partitioner.removeFromGrid(this, this.entityType);
 }
 
 movingObject.prototype.draw = function (ctx) {

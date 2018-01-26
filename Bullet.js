@@ -25,7 +25,11 @@ class Bullet extends movingObject {
     }
 
     // Bullet 'pop' animation needs to be made here.
-    /*destroy() {
+    destroy() {
         this.removeFromWorld = true;
-    }*/
+        this.game.partitioner.removeFromGrid(this, this.entityType);
+        if (this.owner.myBullet) {
+            this.owner.myBullet = null;
+        }
+    }
 }
