@@ -43,13 +43,22 @@ class Bacteriophage extends movingObject {
     update() {
         var pPos = this.game.playerPosition;
 
-        this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2) ;
+        if (Math.abs(pPos.x - this.x) > 30 || Math.abs(pPos.y - this.y) > 30) {
 
+            this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2) ;
+
+            this.xVel = this.speed * Math.cos(this.angle);
+            this.yVel = this.speed * Math.sin(this.angle);
+        } else {
+            this.xVel = this.yVel = 0;
+            this.myBulletReset -= this.game.clockTick;
+        }
+        
         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 80 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
             this.myBullet = new Bullet(this.game, bulletPos,
-                                    this.angle, 0, 25, 0,
+                                    this.angle, 0, 20, 0,
                                     {x: 0, y: 0, w: 0, h: 0}, this, 20);
             this.myBulletReset = this.myBulletTime;
         } else if (this.myBullet != null) {
@@ -62,9 +71,6 @@ class Bacteriophage extends movingObject {
             this.myBulletReset -= this.game.clockTick;
             //console.log(this.myBulletReset);
         }
-
-        this.xVel = this.speed * Math.cos(this.angle);
-        this.yVel = this.speed * Math.sin(this.angle);
 
         super.update();
     }
