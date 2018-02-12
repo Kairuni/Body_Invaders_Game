@@ -22,18 +22,26 @@ Entity.prototype.collide = function(otherEntity) {
 Entity.prototype.update = function () {
 }
 
+Entity.prototype.screenX = function() {
+    return this.game.screenWidth/2 + this.x - this.game.playerPosition.x;
+}
+
+Entity.prototype.screenY = function() {
+    return this.game.screenHeight/2 + this.y - this.game.playerPosition.y;
+}
+
 Entity.prototype.draw = function (ctx) {
     var ctx = this.game.ctx;
     // Draw our rectangle BB first.
     if (this.game.showOutlines) {
         //ctx.fillStyle = "Green";
         ctx.strokeStyle = "Green";
-        ctx.strokeRect(Math.floor(this.x) - this.w/2, Math.floor(this.y) - this.h/2, this.w, this.h);
+        ctx.strokeRect(Math.floor(this.screenX()) - this.w/2, Math.floor(this.screenY()) - this.h/2, this.w, this.h);
     }
     if (this.game.showOutlines && this.radius) {
         this.game.ctx.beginPath();
         ctx.strokeStyle = "Orange";
-        ctx.arc(Math.floor(this.x), Math.floor(this.y), this.radius, 0, Math.PI * 2, false);
+        ctx.arc(Math.floor(this.screenX()), Math.floor(this.screenY()), this.radius, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.closePath();
     }

@@ -11,7 +11,7 @@ class redBloodCell extends movingObject {
     }
 
     draw(ctx) {
-        this.anim.drawFrame(this.game.clockTick, ctx, this.x - 50, this.y - 50);
+        this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 50, this.screenY() - 50);
         super.draw(ctx);
     }
 }

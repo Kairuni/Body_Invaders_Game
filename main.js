@@ -1,16 +1,31 @@
+const BG_TIMER = 1.333;
+
 function Background(game) {
     Entity.call(this, game, 0, 400);
     this.radius = 200;
+    this.timer = 0;
 }
 
 Background.prototype = new Entity(null, [0,0], [0,0]);
 Background.prototype.constructor = Background;
 
 Background.prototype.update = function () {
+    this.timer += this.game.clockTick;
 }
 
 Background.prototype.draw = function (ctx) {
-    ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground.png"), 0, 0);
+    if (this.timer < BG_TIMER) {
+        ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground.png"), 0, 0);
+    } else if (this.timer >= BG_TIMER && this.timer < BG_TIMER + .05) {
+        ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground2.png"), 0, 0);
+    } else if (this.timer >= BG_TIMER + .05 && this.timer < BG_TIMER + .1) {
+        ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground3.png"), 0, 0);
+    } else if (this.timer >= BG_TIMER + .1) {
+        ctx.drawImage(ASSET_MANAGER.getAsset("./assets/Maps/HeartBackground2.png"), 0, 0);
+    }
+    if (this.timer >= BG_TIMER + .15) {
+        this.timer = 0;
+    }
 }
 
 // the "main" code begins here
@@ -20,6 +35,8 @@ var ASSET_MANAGER = new AssetManager();
 ASSET_MANAGER.queueDownload("./assets/Units/Allies.png");
 ASSET_MANAGER.queueDownload("./assets/Units/Enemies.png");
 ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground.png");
+ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground2.png");
+ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground3.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -31,6 +48,8 @@ ASSET_MANAGER.downloadAll(function () {
 
     var gameEngine = new GameEngine();
     gameEngine.partitioner = new levelPartitioner({x: 1000, y: 1000}, 20);
+    gameEngine.screenWidth = canvas.width;
+    gameEngine.screenHeight = canvas.height;
 
     var bg = new Background(gameEngine, {x: 0, y: 0}, {w: 0, h: 0});
     gameEngine.addStaticEntity(bg);

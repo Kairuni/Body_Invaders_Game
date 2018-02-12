@@ -29,7 +29,7 @@ class Bacteriophage extends movingObject {
         var animFrame = Math.floor(this.animElapsedTimer/this.animFrameDuration);
 
         //console.log(animFrame);
-        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.x - this.radius - ROTATION_BUFFER, this.y - this.radius - ROTATION_BUFFER);
+        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.screenX() - this.radius - ROTATION_BUFFER, this.screenY() - this.radius - ROTATION_BUFFER);
 
         this.animElapsedTimer += this.game.clockTick;
 
@@ -53,7 +53,7 @@ class Bacteriophage extends movingObject {
             this.xVel = this.yVel = 0;
             this.myBulletReset -= this.game.clockTick;
         }
-        
+
         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 80 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
