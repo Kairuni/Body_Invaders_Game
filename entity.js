@@ -23,11 +23,11 @@ Entity.prototype.update = function () {
 }
 
 Entity.prototype.screenX = function() {
-    return this.game.screenWidth/2 + this.x - this.game.playerPosition.x;
+    return this.game.screenWidth/2 + this.x - this.game.player.x;
 }
 
 Entity.prototype.screenY = function() {
-    return this.game.screenHeight/2 + this.y - this.game.playerPosition.y;
+    return this.game.screenHeight/2 + this.y - this.game.player.y;
 }
 
 Entity.prototype.draw = function (ctx) {

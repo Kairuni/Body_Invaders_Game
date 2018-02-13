@@ -41,7 +41,7 @@ class Bacteriophage extends movingObject {
 
 
     update() {
-        var pPos = this.game.playerPosition;
+        var pPos = this.game.player;
 
         if (Math.abs(pPos.x - this.x) > 30 || Math.abs(pPos.y - this.y) > 30) {
 
@@ -54,7 +54,7 @@ class Bacteriophage extends movingObject {
             this.myBulletReset -= this.game.clockTick;
         }
 
-        var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 80 * Math.sin(this.angle)};
+        var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 50 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
             this.myBullet = new Bullet(this.game, bulletPos,

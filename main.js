@@ -68,7 +68,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     var playerShip = new Ship(gameEngine, {x: 200, y: 300});
 
-    gameEngine.playerPosition = playerShip;
+    gameEngine.player = playerShip;
 
 
 

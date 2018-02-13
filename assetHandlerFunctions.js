@@ -18,8 +18,8 @@ rotateAndCache = function (image, angle, pos = null, dim = null) {
                       -(dim.w / 2), -(dim.h / 2), dim.w, dim.h);
     }
     offscreenCtx.restore();
-    offscreenCtx.strokeStyle = "red";
-    offscreenCtx.strokeRect(0,0,size,size);
+    //offscreenCtx.strokeStyle = "red";
+    //offscreenCtx.strokeRect(0,0,size,size);
     return offscreenCanvas;
 }
 
