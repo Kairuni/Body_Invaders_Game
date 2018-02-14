@@ -54,7 +54,7 @@ class SputnikJr extends movingObject {
             this.myBulletReset -= this.game.clockTick;
         }
 
-        var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 50 * Math.sin(this.angle)};
+/*         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 50 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
             this.myBullet = new Bullet(this.game, bulletPos,
@@ -70,7 +70,23 @@ class SputnikJr extends movingObject {
         } else {
             this.myBulletReset -= this.game.clockTick;
             //console.log(this.myBulletReset);
-        }
+        } */
+		        if (this.fireTimer > 0)
+            this.fireTimer -= this.game.clockTick;
+
+        if (this.fireTimer <= 0) {
+            if (this.game.click) {
+                var myBullet1 = new Bullet(this.game, 0, 0, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, 0, 90, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, 0, 180, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, 0, 270, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                this.fireTimer = this.fireRate;
+				//mySound.play();
+            }
 
         super.update();
     }

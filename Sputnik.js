@@ -71,6 +71,26 @@ class Sputnik extends movingObject {
             this.myBulletReset -= this.game.clockTick;
             //console.log(this.myBulletReset);
         }
+		
+		        this.angle = Math.atan2(this.game.mouse.x - this.game.screenWidth/2, this.game.screenHeight/2 - this.game.mouse.y) - (3.1415/2);
+
+        if (this.fireTimer > 0)
+            this.fireTimer -= this.game.clockTick;
+
+        if (this.fireTimer <= 0) {
+            if (this.game.click) {
+                var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle - (3.1415/4)),
+                                                        y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
+                                                        this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle + (3.1415/4)),
+                                                        y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
+                                                        this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                this.fireTimer = this.fireRate;
+				//mySound.play();
+            }
+        }
 
         super.update();
     }
