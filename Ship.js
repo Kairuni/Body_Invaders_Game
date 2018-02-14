@@ -47,14 +47,22 @@ class Ship extends MovingObject {
 
         if (this.fireTimer <= 0) {
             if (this.game.click) {
-                var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle - (3.1415/4)),
-                                                        y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
-                                                        this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
-                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
-                var myBullet1 = new Bullet(this.game, {x: this.x + 34 * Math.cos(this.angle + (3.1415/4)),
-                                                        y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
-                                                        this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
-                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, 
+											{x: this.x + 34 * Math.cos(this.angle - (3.1415/4)), y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
+											this.angle, 
+											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+											2,
+											{x: 0, y: 0, w: 25, h: 25},
+											this,
+											2);
+                var myBullet1 = new Bullet(this.game, 
+											{x: this.x + 34 * Math.cos(this.angle + (3.1415/4)), y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
+											this.angle,
+											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+											2,
+											{x: 0, y: 0, w: 25, h: 25}, 
+											this,
+											2);
                 this.fireTimer = this.fireRate;
 				this.mySound.play();
             }

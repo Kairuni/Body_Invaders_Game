@@ -64,8 +64,7 @@ class Bacteriophage extends MovingObject {
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
             this.myBullet = new Bullet(this.game, bulletPos,
-                                    this.angle, 0, 20, 0,
-                                    {x: 0, y: 0, w: 0, h: 0}, this, 20);
+                                    this.angle, 0, 20, {x: 0, y: 0, w: 1, h: 1}, this, 20);
             this.myBulletReset = this.myBulletTime;
         } else if (this.myBullet != null) {
             this.game.partitioner.removeFromGrid(this.myBullet, this.myBullet.entityType);

@@ -1,8 +1,8 @@
-const SPTNKJR_RADIUS = 50;
+const BLBR_RADIUS = 50;
 
 class Blobber extends MovingObject {
     constructor(game, pos) {
-        super(game, pos, SPTNKJR_RADIUS);
+        super(game, pos, BLBR_RADIUS);
 
         this.hp = 200;
 
@@ -48,8 +48,14 @@ class Blobber extends MovingObject {
         if (this.fireTimer <= 0) {
                 //console.log("Blobber Should Shoot");
                 for (var i = 0; i < 1; i += 1/5) {
-                    new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle - (2/5) + i, 200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
-                                    {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                    new Bullet(this.game,
+								{'x': this.x, 'y': this.y},
+								this.angle - (2/5) + i,
+								200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+								4,
+								{x: 26, y: 26, w: 25, h: 25},
+								this,
+								2);
                 }
                 this.fireTimer = this.fireRate;
 				//mySound.play();

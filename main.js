@@ -2,7 +2,7 @@
 
 var ASSET_MANAGER = new AssetManager();
 
-unitList = ["Allies.png", "Enemies.png"];
+unitList = ["Allies.png", "Enemies.png", "Bullets.png", "Bosses.png"];
 mapList = ["HeartBackground.png", "HeartBackground2.png", "HeartBackground3.png", "CellFloor.png", "CellWall.png"];
 
 for (var i = 0; i < unitList.length; i++) {
@@ -44,9 +44,11 @@ ASSET_MANAGER.downloadAll(function () {
     var WBC = new WhiteBloodCell(gameEngine, {x: 100, y: 300}, 25);
     var RBC2 = new RedBloodCell(gameEngine, {x: 100, y: 320}, 25);
 
-    var BPhage = new Bacteriophage(gameEngine, {x: 800, y: 100}, 200);
-	var Sptnk = new Sputnik(gameEngine, {x: 800, y: 300}, 200);
-	var SptnkJr = new Blobber(gameEngine, {x: 800, y: 500}, 200);
+    //var BPhage = new Bacteriophage(gameEngine, {x: 800, y: 100}, 200);
+	//var Sptnk = new Sputnik(gameEngine, {x: 800, y: 600}, 200);
+	//var SptnkBoss = new SputnikBoss(gameEngine, {x: 800, y: 300}, 200);
+	var Blber = new Blobber(gameEngine, {x: 800, y: 500});
+	var BlberBoss = new BlobberBoss(gameEngine, {x: 800, y: 500});
 
     var playerShip = new Ship(gameEngine, {x: 200, y: 300});
 
@@ -67,7 +69,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.init(ctx);
 
     canvas.addEventListener("mousedown", function (e) {
-        if (gameEngine.started)
+        if (!gameEngine.started)
             gameEngine.start();
     }, false);
 });

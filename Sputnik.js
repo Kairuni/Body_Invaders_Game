@@ -18,6 +18,7 @@ class Sputnik extends MovingObject {
     draw(ctx) {
         if (this.testRange())
             return;
+		
         this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 75, this.screenY() - 75);
         super.draw(ctx);
     }
@@ -47,10 +48,15 @@ class Sputnik extends MovingObject {
         if (this.fireTimer <= 0) {
                 //console.log("Sputnik Should Shoot");
                 for (var i = 0; i < 2 * 3.1415; i += 3.1415 / 8) {
-                    new Bullet(this.game, {'x': this.x, 'y': this.y}, 0 + i, 200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
-                                    {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                    new Bullet(this.game,
+								{'x': this.x, 'y': this.y},
+								0 + i,
+								200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+								2,
+								{x: 76, y: 26, w: 25, h: 25},
+								this,
+								2);
                 }
-
                 this.fireTimer = this.fireRate;
 				//mySound.play();
         }
