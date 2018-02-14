@@ -10,6 +10,9 @@ class WhiteBloodCell extends MovingObject {
     }
 
     draw(ctx) {
+        if (this.testRange())
+            return;
+
         ctx.drawImage(this.img, 0, 401,  // source from sheet
                       100, 100,
                       this.screenX() - 50, this.screenY() - 50, 100, 100);

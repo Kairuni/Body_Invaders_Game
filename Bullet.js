@@ -16,7 +16,7 @@ class Bullet extends MovingObject {
 
     // Bullets only care about colliding with walls, units will handle taking damage themselves.
     update() {
-        super.update({ship: false, wall: true, bullet: false});
+        super.update({ship: false, wall: true, bullet: false}, true);
     }
 
     handleCollisions(colliders) {

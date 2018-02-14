@@ -22,6 +22,10 @@ Entity.prototype.collide = function(otherEntity) {
 Entity.prototype.update = function () {
 }
 
+Entity.prototype.testRange = function() {
+    return Math.abs(this.x - this.game.player.x) > 1700 || Math.abs(this.y - this.game.player.y) > 1000;
+}
+
 Entity.prototype.screenX = function() {
     return this.game.screenWidth/2 + this.x - this.game.player.x;
 }

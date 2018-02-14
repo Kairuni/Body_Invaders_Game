@@ -31,7 +31,10 @@ class MovingObject extends Entity {
         }
     }
 
-    update(colTest = {ship: true, wall: true, bullet: true}) {
+    update(colTest = {ship: true, wall: true, bullet: true}, ignoreRange = false) {
+        if (this.testRange() && !ignoreRange)
+            return;
+
         // Remove from partitioner
         this.game.partitioner.removeFromGrid(this, this.entityType);
 

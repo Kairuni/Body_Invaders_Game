@@ -66,5 +66,8 @@ ASSET_MANAGER.downloadAll(function () {
 
 
     gameEngine.init(ctx);
-    gameEngine.start();
+
+    canvas.addEventListener("mousedown", function (e) {
+        gameEngine.start();
+    }, false);
 });
