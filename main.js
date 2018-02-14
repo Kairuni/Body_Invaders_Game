@@ -64,10 +64,10 @@ ASSET_MANAGER.downloadAll(function () {
 
     gameEngine.showOutlines = true;
 
-
     gameEngine.init(ctx);
 
     canvas.addEventListener("mousedown", function (e) {
-        gameEngine.start();
+        if (gameEngine.started)
+            gameEngine.start();
     }, false);
 });
