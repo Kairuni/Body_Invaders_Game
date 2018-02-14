@@ -16,6 +16,9 @@ class SputnikJr extends movingObject {
         this.myBulletReset = 0;
         this.myBulletTime = 1;
 
+        this.fireTimer = 0;
+        this.fireRate = 1;
+
         this.speed = 20;
     }
 
@@ -54,39 +57,25 @@ class SputnikJr extends movingObject {
             this.myBulletReset -= this.game.clockTick;
         }
 
-/*         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 50 * Math.sin(this.angle)};
 
-        if (this.myBulletReset <= 0 && this.myBullet == null) {
-            this.myBullet = new Bullet(this.game, bulletPos,
-                                    this.angle, 0, 20, 0,
-                                    {x: 0, y: 0, w: 0, h: 0}, this, 20);
-            this.myBulletReset = this.myBulletTime;
-        } else if (this.myBullet != null) {
-            this.game.partitioner.removeFromGrid(this.myBullet, this.myBullet.entityType);
-            this.myBullet.x = bulletPos.x;
-            this.myBullet.y = bulletPos.y;
-            this.game.partitioner.addToGrid(this.myBullet, this.myBullet.entityType);
-            this.myBulletReset = this.myBulletTime;
-        } else {
-            this.myBulletReset -= this.game.clockTick;
-            //console.log(this.myBulletReset);
-        } */
-		        if (this.fireTimer > 0)
+        if (this.fireTimer > 0)
             this.fireTimer -= this.game.clockTick;
 
         if (this.fireTimer <= 0) {
-            if (this.game.click) {
-                var myBullet1 = new Bullet(this.game, 0, 0, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                console.log("SputnikJr Should Shoot");
+                var myBullet1 = new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle, 400 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
                                                         {x: 0, y: 0, w: 0, h: 0}, this, 2);
-                var myBullet1 = new Bullet(this.game, 0, 90, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                var myBullet1 = new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle - 1/5, 400 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
                                                         {x: 0, y: 0, w: 0, h: 0}, this, 2);
-                var myBullet1 = new Bullet(this.game, 0, 180, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                var myBullet1 = new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle + 1/5, 400 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
                                                         {x: 0, y: 0, w: 0, h: 0}, this, 2);
-                var myBullet1 = new Bullet(this.game, 0, 270, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                var myBullet1 = new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle - 2/5, 400 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
+                                                        {x: 0, y: 0, w: 0, h: 0}, this, 2);
+                var myBullet1 = new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle + 2/5, 400 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
                                                         {x: 0, y: 0, w: 0, h: 0}, this, 2);
                 this.fireTimer = this.fireRate;
 				//mySound.play();
-            }
+        }
 
         super.update();
     }
