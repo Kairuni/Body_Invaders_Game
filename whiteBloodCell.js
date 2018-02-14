@@ -1,6 +1,6 @@
 const WBC_RADIUS = 37;
 
-class whiteBloodCell extends movingObject {
+class WhiteBloodCell extends MovingObject {
     constructor(game, pos) {
         super(game, pos, WBC_RADIUS);
 

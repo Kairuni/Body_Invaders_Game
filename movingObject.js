@@ -1,4 +1,4 @@
-class movingObject extends Entity {
+class MovingObject extends Entity {
     constructor(game, pos, radius) {
         super(game, pos, {w: radius * 2, h: radius * 2});
 

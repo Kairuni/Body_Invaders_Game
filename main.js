@@ -37,6 +37,8 @@ ASSET_MANAGER.queueDownload("./assets/Units/Enemies.png");
 ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground.png");
 ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground2.png");
 ASSET_MANAGER.queueDownload("./assets/Maps/HeartBackground3.png");
+ASSET_MANAGER.queueDownload("./assets/Maps/CellFloor.png");
+ASSET_MANAGER.queueDownload("./assets/Maps/CellWall.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
@@ -47,7 +49,7 @@ ASSET_MANAGER.downloadAll(function () {
     var ctx = canvas.getContext('2d');
 
     var gameEngine = new GameEngine();
-    gameEngine.partitioner = new levelPartitioner({x: 1000, y: 1000}, 20);
+    gameEngine.partitioner = new LevelPartitioner({x: 1000, y: 1000}, 20);
     gameEngine.screenWidth = canvas.width;
     gameEngine.screenHeight = canvas.height;
 
@@ -60,13 +62,13 @@ ASSET_MANAGER.downloadAll(function () {
     var leftWall = new Wall(gameEngine, {x: 0, y: 400}, {w: 30, h: 1200}, null);
     var rightWall = new Wall(gameEngine, {x: 1000, y: 400}, {w: 30, h: 1200}, null);
 
-    var RBC = new redBloodCell(gameEngine, {x: 100, y: 280}, 25);
-    var WBC = new whiteBloodCell(gameEngine, {x: 100, y: 300}, 25);
-    var RBC2 = new redBloodCell(gameEngine, {x: 100, y: 320}, 25);
+    var RBC = new RedBloodCell(gameEngine, {x: 100, y: 280}, 25);
+    var WBC = new WhiteBloodCell(gameEngine, {x: 100, y: 300}, 25);
+    var RBC2 = new RedBloodCell(gameEngine, {x: 100, y: 320}, 25);
 
-    //var BPhage = new Bacteriophage(gameEngine, {x: 800, y: 100}, 200);
-	//var Sptnk = new Sputnik(gameEngine, {x: 800, y: 300}, 200);
-	var SptnkJr = new SputnikJr(gameEngine, {x: 800, y: 500}, 200);
+    var BPhage = new Bacteriophage(gameEngine, {x: 800, y: 100}, 200);
+	var Sptnk = new Sputnik(gameEngine, {x: 800, y: 300}, 200);
+	var SptnkJr = new Blobber(gameEngine, {x: 800, y: 500}, 200);
 
     var playerShip = new Ship(gameEngine, {x: 200, y: 300});
 

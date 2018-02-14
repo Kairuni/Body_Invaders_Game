@@ -1,18 +1,18 @@
-const SPTNK_RADIUS = 35;
+const SPTNKJR_RADIUS = 50;
 
-class Sputnik extends MovingObject {
+class Blobber extends MovingObject {
     constructor(game, pos) {
-        super(game, pos, SPTNK_RADIUS);
+        super(game, pos, SPTNKJR_RADIUS);
 
-        this.hp = 100;
+        this.hp = 200;
 
         var image = ASSET_MANAGER.getAsset("./assets/Units/Enemies.png");
-        this.anim = new Animation(image, 0, 301, 150, 150, 0.15, 4, true, false);
+        this.anim = new Animation(image, 0, 451, 150, 150, 0.15, 4, true, false);
 
         this.fireTimer = 0;
-        this.fireRate = 5;
+        this.fireRate = 2;
 
-        this.speed = 50;
+        this.speed = 20;
     }
 
     draw(ctx) {
@@ -40,12 +40,11 @@ class Sputnik extends MovingObject {
             this.fireTimer -= this.game.clockTick;
 
         if (this.fireTimer <= 0) {
-                //console.log("Sputnik Should Shoot");
-                for (var i = 0; i < 2 * 3.1415; i += 3.1415 / 8) {
-                    new Bullet(this.game, {'x': this.x, 'y': this.y}, 0 + i, 200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
+                //console.log("Blobber Should Shoot");
+                for (var i = 0; i < 1; i += 1/5) {
+                    new Bullet(this.game, {'x': this.x, 'y': this.y}, this.angle - (2/5) + i, 200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 4, 0,
                                     {x: 0, y: 0, w: 0, h: 0}, this, 2);
                 }
-
                 this.fireTimer = this.fireRate;
 				//mySound.play();
         }

@@ -1,4 +1,4 @@
-class Bullet extends movingObject {
+class Bullet extends MovingObject {
     constructor(game, pos, angle, speed, radius, img, imgDims, owner, damage = 5) {
         super(game, pos, radius);
 

@@ -1,4 +1,4 @@
-class levelPartitioner {
+class LevelPartitioner {
     constructor(levelDims, gridSize) {
         this.grid = [];
         for (var x = 0; x < levelDims.x / gridSize; x++) {

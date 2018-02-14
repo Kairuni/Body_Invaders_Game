@@ -1,6 +1,6 @@
 const RBC_RADIUS = 44;
 
-class redBloodCell extends movingObject {
+class RedBloodCell extends MovingObject {
     constructor(game, pos) {
         super(game, pos, RBC_RADIUS);
 

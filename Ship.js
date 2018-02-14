@@ -1,9 +1,9 @@
-class Ship extends movingObject {
-	
+class Ship extends MovingObject {
+
 	//var mySound;
-	
+
     constructor(game, pos) {
-        super(game, pos, 50);
+        super(game, pos, 40);
         this.hp = 100;
 
         this.fireRate = .2;
@@ -18,7 +18,7 @@ class Ship extends movingObject {
         this.rightTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 101, w: 100, h: 100}, 1);
         this.leftTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 201, w: 100, h: 100}, 1);
 		//mySound = new sound(./assets/Sound/"laser.wav");
-		
+
     }
 
     update() {
@@ -72,7 +72,7 @@ class Ship extends movingObject {
         var animFrame = Math.floor(this.animElapsedTimer/this.animFrameDuration);
 
         //console.log(animFrame);
-        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.game.screenWidth/2 - this.radius - ROTATION_BUFFER, this.game.screenHeight/2 - this.radius - ROTATION_BUFFER);
+        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.game.screenWidth/2 - 50 - ROTATION_BUFFER, this.game.screenHeight/2 - 50 - ROTATION_BUFFER);
 
         this.animElapsedTimer += this.game.clockTick;
 

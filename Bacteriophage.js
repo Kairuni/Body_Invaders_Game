@@ -1,6 +1,6 @@
 const BPHAGE_RADIUS = 75;
 
-class Bacteriophage extends movingObject {
+class Bacteriophage extends MovingObject {
     constructor(game, pos) {
         super(game, pos, BPHAGE_RADIUS);
 
