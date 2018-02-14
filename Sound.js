@@ -1,15 +1,21 @@
-
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function(){
-        this.sound.play();
+class Sound {
+    constructor(filename, channel) {
+        var src = ASSET_MANAGER.getAudio(filename);
+        if (src !== null) {
+            this.sound = src;
+            //console.log(this.sound);
+        }
     }
-    this.stop = function(){
-        this.sound.pause();
+
+    play() {
+        if (this.sound) {
+            this.sound.play();
+        }
+    }
+
+    stop() {
+        if (this.sound) {
+            this.sound.stop();
+        }
     }
 }

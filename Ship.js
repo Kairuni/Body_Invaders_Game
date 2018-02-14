@@ -17,7 +17,8 @@ class Ship extends MovingObject {
         this.topDownSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 0, w: 100, h: 100}, this.animFrames);
         this.rightTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 101, w: 100, h: 100}, 1);
         this.leftTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 201, w: 100, h: 100}, 1);
-		//mySound = new sound(./assets/Sound/"laser.wav");
+
+        this.mySound = new Sound("./assets/Sound/playerLaser.wav");
 
     }
 
@@ -55,7 +56,7 @@ class Ship extends MovingObject {
                                                         this.angle, 600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel), 2, 0,
                                                         {x: 0, y: 0, w: 0, h: 0}, this, 2);
                 this.fireTimer = this.fireRate;
-				//mySound.play();
+				this.mySound.play();
             }
         }
 
