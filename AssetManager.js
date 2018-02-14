@@ -52,7 +52,7 @@ class AssetManager {
             var path = this.audioQueue[i];
 
             audio.addEventListener("canplaythrough", function () {
-                console.log("Loaded or playing " + this.src);
+                //console.log("Loaded or playing " + this.src);
                 that.successCount++;
                 if(that.isDone()) callback();
             });

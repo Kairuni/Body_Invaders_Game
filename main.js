@@ -21,8 +21,8 @@ for (var i = 0; i < audioList.length; i++) {
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');
-    canvas.width = window.innerWidth - 30;
-    canvas.height = window.innerHeight - 30;
+    //canvas.width = window.innerWidth - 30;
+    //canvas.height = window.innerHeight - 30;
 
     var ctx = canvas.getContext('2d');
 
