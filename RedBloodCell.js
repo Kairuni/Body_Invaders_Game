@@ -4,6 +4,10 @@ class RedBloodCell extends MovingObject {
     constructor(game, path) {
         super(game, path[0], RBC_RADIUS);
 
+        //console.log(path[0]);
+
+        this.team = 1;
+
         this.hp = 20;
 
         var image = ASSET_MANAGER.getAsset("./assets/Units/Allies.png");
@@ -11,11 +15,14 @@ class RedBloodCell extends MovingObject {
 
         this.path = path;
         this.pathIdx = 0;
+
+        this.speed = 200;
     }
 
     update() {
-
         var nPos = this.path[this.pathIdx];
+
+        //console.log(nPos);
 
         if (!Math.abs(nPos.x - this.x) > 30 || Math.abs(nPos.y - this.y) > 30) {
 
@@ -31,7 +38,7 @@ class RedBloodCell extends MovingObject {
             }
         }
 
-        super.update();
+        super.update({ship: true, wall: false, bullet: true}, true);
     }
 
     draw(ctx) {

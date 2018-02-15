@@ -1,5 +1,5 @@
 class MovingObject extends Entity {
-    constructor(game, pos, radius) {
+    constructor(game, pos, radius, team = 2) {
         super(game, pos, {w: radius * 2, h: radius * 2});
 
         this.xVel = 0;
@@ -15,6 +15,8 @@ class MovingObject extends Entity {
         this.colliding = false;
 
         this.entityType = 1;
+
+        this.team = team;
 
         if (game)
             game.addEntity(this);
@@ -86,7 +88,7 @@ class MovingObject extends Entity {
             for (var i = 0; i < collisions.bullet.length; i++) {
                 var bullet = collisions.bullet[i];
 
-                if (bullet.owner != this) {
+                if (bullet.owner != this && bullet.team != this.team) {
                     this.hp -= bullet.dmg;
                     bullet.destroy();
                 }

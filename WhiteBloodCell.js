@@ -6,6 +6,8 @@ class WhiteBloodCell extends MovingObject {
 
         this.hp = 80;
 
+        this.team = 1;
+
         this.img = ASSET_MANAGER.getAsset("./assets/Units/Allies.png");
     }
 

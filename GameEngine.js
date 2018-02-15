@@ -150,6 +150,10 @@ GameEngine.prototype.update = function () {
             entitiesCount--;
         }
     }
+
+    if (this.bg) {
+        this.bg.update();
+    }
 }
 
 GameEngine.prototype.loop = function () {

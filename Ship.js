@@ -1,9 +1,14 @@
+const PLAYER_VEL = 400;
+
 class Ship extends MovingObject {
 
 	//var mySound;
 
     constructor(game, pos) {
         super(game, pos, 40);
+
+        this.team = 0;
+
         this.hp = 100;
 
         this.fireRate = .2;
@@ -23,12 +28,12 @@ class Ship extends MovingObject {
     }
 
     update() {
-        if (this.game.up) this.yVel = -200;
-        else if (this.game.down) this.yVel = 200;
+        if (this.game.up) this.yVel = -PLAYER_VEL;
+        else if (this.game.down) this.yVel = PLAYER_VEL;
         else this.yVel = 0;
 
-        if (this.game.left) this.xVel = -200;
-        else if (this.game.right) this.xVel = 200;
+        if (this.game.left) this.xVel = -PLAYER_VEL;
+        else if (this.game.right) this.xVel = PLAYER_VEL;
         else this.xVel = 0;
 
         if (this.xVel != 0 && this.yVel != 0) {
@@ -47,20 +52,20 @@ class Ship extends MovingObject {
 
         if (this.fireTimer <= 0) {
             if (this.game.click) {
-                var myBullet1 = new Bullet(this.game, 
+                var myBullet1 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle - (3.1415/4)), y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
-											this.angle, 
+											this.angle,
 											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
 											2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
 											2);
-                var myBullet1 = new Bullet(this.game, 
+                var myBullet1 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle + (3.1415/4)), y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
 											this.angle,
 											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
 											2,
-											{x: 0, y: 0, w: 25, h: 25}, 
+											{x: 0, y: 0, w: 25, h: 25},
 											this,
 											2);
                 this.fireTimer = this.fireRate;

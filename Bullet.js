@@ -4,16 +4,18 @@ class Bullet extends MovingObject {
 
         this.xVel = speed * Math.cos(angle);
         this.yVel = speed * Math.sin(angle);
-		
+
         this.angle = angle;
 
 		var image = ASSET_MANAGER.getAsset("./assets/Units/Bullets.png");
-		console.log(imgDims);
+		//console.log(imgDims);
 		this.anim = new Animation(image, imgDims.x, imgDims.y, imgDims.w, imgDims.h, 0.15, 1, true, false);
-		
+
         this.owner = owner;
 
         this.dmg = damage;
+
+        this.team = this.owner.team;
 
         this.entityType = 2;
     }
@@ -27,7 +29,7 @@ class Bullet extends MovingObject {
 		this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 12.5, this.screenY() - 12.5);
 		super.draw(ctx);
 	}
-	
+
     handleCollisions(colliders) {
         if (colliders.wall.length > 0)
             this.destroy();
