@@ -57,8 +57,8 @@ class LevelPartitioner {
         var ships = type === 1;
         var bullets = type === 2;
 
-        if (type === 0)
-            console.log(bounds);
+    //    if (type === 0 && entity.y > 24000)
+    //        console.log(entity.x + ", " + entity.y + ", " + bounds.x1 + ", " + bounds.x2 + ", " + bounds.y1 + ", " + bounds.y2);
 
         for (var x = bounds.x1; x <= bounds.x2; x++) {
             for (var y = bounds.y1; y <= bounds.y2; y++) {
@@ -71,7 +71,7 @@ class LevelPartitioner {
                 } else if (bullets) {
                     this.grid[x][y].bullets.push(entity);
                 } else if (walls) {
-                    console.log("Added a wall to the grid.");
+                    //console.log("Added a wall to the grid at " + x + ", " + y + ".");
                     this.grid[x][y].walls.push(entity);
                 }
             }
@@ -102,13 +102,14 @@ class LevelPartitioner {
                 var walls = this.grid[x][y].walls;
 
                 for (var i = 0; i < Math.max(ships.length, bullets.length, walls.length); i++) {
-                    if (test.ship && i < ships.length && i < ships[i].collide(entity) && collisions.ship.indexOf(ships[i]) == -1) {
+                    if (test.ship && i < ships.length && ships[i].collide(entity) && collisions.ship.indexOf(ships[i]) == -1) {
                         collisions.ship.push(ships[i]);
                     }
-                    if (test.wall && i < walls.length && i < walls[i].collide(entity) && collisions.wall.indexOf(walls[i]) == -1) {
+                    if (test.wall && i < walls.length && walls[i].collide(entity) && collisions.wall.indexOf(walls[i]) == -1) {
                         collisions.wall.push(walls[i]);
+                        ///console.log(bounds);
                     }
-                    if (test.bullet && i < bullets.length && i < bullets[i].collide(entity) && collisions.bullet.indexOf(bullets[i]) == -1) {
+                    if (test.bullet && i < bullets.length && bullets[i].collide(entity) && collisions.bullet.indexOf(bullets[i]) == -1) {
                         collisions.bullet.push(bullets[i]);
                     }
                 }

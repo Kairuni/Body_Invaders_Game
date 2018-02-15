@@ -1,6 +1,6 @@
 import tkinter as tk;
 import PIL.Image as Image;
-import PIL.ImageTk as ImageTk;
+##import PIL.ImageTk as ImageTk;
 
 filename = input("Enter map filename: ");
 image = Image.open(filename);
@@ -23,6 +23,7 @@ pathHints = [];
 ## 9 - Sputnik Boss (rg 255, b 200)
 ## 10 - Blobber Boss (rb 255, g 200)
 ## 11 - Bacteriophage Boss (r 255, b 100, g 0)
+## 12 - Spawn location
 entityTypes = {
     '255255255': 0,
     '000': 1,
@@ -35,7 +36,9 @@ entityTypes = {
     '255255200': 9,
     '255200255': 10,
     '2550100': 11,
+    '120170240': 12,
 };
+
 def getEntityType(r, g, b):
     return entityTypes[str(r)+str(g)+str(b)];
 
@@ -45,15 +48,15 @@ def testAdjacent(x, y):
         loc[0] += x;
         loc[1] += y;
         if (loc[0] >= 0 and loc[0] < w and loc[1] >= 0 and loc[1] < h):
-            r, g, b = image.getpixel((loc[0], loc[1]));
+            r, g, b, a = image.getpixel((loc[0], loc[1]));
             if (getEntityType(r, g, b) != 1):
                 return True;
     return False;
-        
+
 
 for y in range(h):
     for x in range(w):
-        r, g, b = image.getpixel((x, y));
+        r, g, b, a = image.getpixel((x, y));
         etype = getEntityType(r, g, b)
         if (etype == 1):
             ## Test adjacent
@@ -63,8 +66,10 @@ for y in range(h):
             ## Just a marker:
             etype = 0;
             pathHints.append((x,y));
-            
-        ##print(etype, end = "");
+
+        mapArray[x][y] = etype;
+
+    ##    print(etype, end = "");
     ##print();
 
 print("Map array built.");
@@ -75,14 +80,84 @@ print("Detected blood path markers (you still have to actually enter these manua
 
 for hint in pathHints:
     print(hint[0],hint[1], end = ", ");
-    
+
 print();
 
-x, y = input("Enter an x and y value to form a blood path, or -1 as either for none (x space y):").split();
-x = int(x);
-y = int(y);
+bloodPaths = [];
 
-print("Test",x,y);
+done = False;
+while (not done):
+    x, y = input("Enter an x and y value to form a blood path, or -1 as either for none (x space y): ").split();
+    x = int(x);
+    y = int(y);
+
+    cPath = [];
+    while (x != -1 and y != -1):
+        print("Point added at",x,y);
+        cPath.append((x,y));
+        x, y = input("Enter x and y, -1 in either to finish: ").split();
+        x = int(x);
+        y = int(y);
+
+    if (len(cPath) > 0):
+        bloodPaths.append(cPath);
+
+    done = input("Are you done adding paths? T or F: ");
+    if (done == "T"):
+        print("Done adding paths.");
+        done = True;
+    else:
+        print("Adding another path.");
+        done = False;
+
+print("Building JavaScript array of data");
+
+
+className = filename.split(".")[0];
+
+arrayString = className + " = {};\n";
+
+arrayString += className + ".mapData = [";
+
+for y in range(h):
+    arrayString += "[";
+    for x in range(w):
+        if (x > 0):
+            arrayString += ", ";
+        arrayString += str(mapArray[x][y]);
+
+    arrayString += "],\n";
+
+arrayString += "];\n";
+
+arrayString += className + ".bloodPaths = ["
+
+first = True;
+for path in bloodPaths:
+    if (not first):
+        arrayString += ", ";
+    arrayString += "[";
+
+    subFirst = True;
+    for entry in path:
+        if (not subFirst):
+            arrayString += ", ";
+
+        arrayString += "{x: " + str(entry[0]) + ", y: " + str(entry[1]) + "}";
+        subFirst = False;
+
+    arrayString += "]"
+    first = False;
+
+arrayString += "]\n";
+
+print(arrayString);
+
+print("\n\nWriting to file.\n");
+outFile = open("MAP_OUTPUT.txt", "w");
+outFile.write(arrayString);
+outFile.close();
+print("Done");
 
 
 ##
@@ -96,7 +171,7 @@ print("Test",x,y);
 ##        self.columnconfigure(0, weight = 1);
 ##        self.rowconfigure(0, weight = 1);
 ##        self.rowconfigure(1, weight = 1);
-##        
+##
 ##        self.createWidgets();
 ##
 ##    def createWidgets(self):

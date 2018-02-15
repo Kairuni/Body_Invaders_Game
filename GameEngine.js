@@ -54,7 +54,7 @@ GameEngine.prototype.init = function (ctx) {
 
 GameEngine.prototype.start = function () {
     console.log("starting game");
-    started = true;
+    this.started = true;
     var that = this;
     (function gameLoop() {
         that.loop();
@@ -119,7 +119,7 @@ GameEngine.prototype.addEntity = function (entity) {
 
 GameEngine.prototype.addStaticEntity = function (entity) {
     //console.log('added static entity');
-    this.entities.push(entity);
+    this.staticEntities.push(entity);
 }
 
 GameEngine.prototype.draw = function () {
