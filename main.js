@@ -18,6 +18,12 @@ for (var i = 0; i < audioList.length; i++) {
     ASSET_MANAGER.queueAudio("./assets/Sound/" + audioList[i]);
 }
 
+ASSET_MANAGER.queueImage("./assets/NeedleFull.png");
+ASSET_MANAGER.queueImage("./assets/NeedleUpper.png");
+
+// TODO: Add picture of super buff blonde guy getting into the spaceship and then shrink ray'd.
+// In a hospital room.
+
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting up da sheild");
     var canvas = document.getElementById('gameWorld');

@@ -59,7 +59,7 @@ class Ship extends MovingObject {
 											2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											2);
+											7);
                 var myBullet1 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle + (3.1415/4)), y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
 											this.angle,
@@ -67,7 +67,7 @@ class Ship extends MovingObject {
 											2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											2);
+											7);
                 this.fireTimer = this.fireRate;
 				this.mySound.play();
             }
