@@ -149,7 +149,7 @@ GameEngine.prototype.draw = function () {
         this.ctx.fillStyle = "green";
         this.ctx.fillText("!YOU WIN!", this.screenWidth/2, this.screenHeight/2);
 
-    } else if (this.player && this.player.hp && this.player.hp <= 0) {
+    } else if (this.player && this.player.hp != null && this.player.hp <= 0) {
         this.ctx.font = "60px Arial";
         this.ctx.fillStyle = "yellow";
         this.ctx.fillText("!YOU LOST REFRESH TO CONTINUE!", 200, this.screenHeight/2);
