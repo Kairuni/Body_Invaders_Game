@@ -16,7 +16,7 @@ class Bacteriophage extends MovingObject {
         this.myBulletReset = 0;
         this.myBulletTime = 1;
 
-        this.speed = 100;
+        this.speed = 180;
     }
 
     draw(ctx) {
@@ -46,7 +46,7 @@ class Bacteriophage extends MovingObject {
     update() {
         if (this.testRange())
             return;
-            
+
         var pPos = this.game.player;
 
         if (Math.abs(pPos.x - this.x) > 30 || Math.abs(pPos.y - this.y) > 30) {

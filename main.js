@@ -2,7 +2,7 @@
 
 var ASSET_MANAGER = new AssetManager();
 
-unitList = ["Allies.png", "Enemies.png", "Bullets.png", "Bosses.png"];
+unitList = ["Allies.png", "Enemies.png", "Bullets.png", "Bosses.png", "Boosts.png"];
 mapList = ["HeartBackground.png", "HeartBackground2.png", "HeartBackground3.png", "CellFloor.png", "CellWall.png"];
 
 for (var i = 0; i < unitList.length; i++) {

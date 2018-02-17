@@ -49,7 +49,7 @@ levelBuilder = function(game, mapArray, bloodPaths) {
             } else if (unit == 6) {
                 new Blobber(game, coords);
             } else if (unit == 7) {
-
+                new Boost(game, coords);
             } else if (unit == 9) {
                 new SputnikBoss(game, coords);
             } else if (unit == 10) {

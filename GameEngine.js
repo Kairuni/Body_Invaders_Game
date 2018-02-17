@@ -131,6 +131,14 @@ GameEngine.prototype.draw = function () {
     for (var i = 0; i < this.entities.length; i++) {
         this.entities[i].draw(this.ctx);
     }
+
+    if (this.player && this.player.hp) {
+        this.ctx.fillStyle = "black";
+        this.ctx.fillRect(0,0,300,20);
+        this.ctx.fillStyle = "green";
+        this.ctx.fillRect(1, 1, 298 * this.player.hp / this.player.maxHp, 18);
+    }
+
     this.ctx.restore();
 }
 

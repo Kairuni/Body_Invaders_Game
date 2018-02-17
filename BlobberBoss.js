@@ -18,7 +18,7 @@ class BlobberBoss extends MovingObject {
     draw(ctx) {
         if (this.testRange())
             return;
-            
+
         this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 300, this.screenY() - 300, 2);
         super.draw(ctx);
     }
@@ -30,16 +30,11 @@ class BlobberBoss extends MovingObject {
 
         var pPos = this.game.player;
 
-        if (Math.abs(pPos.x - this.x) > 30 || Math.abs(pPos.y - this.y) > 30) {
 
-            this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2) ;
+        this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y);// - (3.1415/2) ;
 
-            this.xVel = this.speed * Math.cos(this.angle);
-            this.yVel = this.speed * Math.sin(this.angle);
-        } else {
-            this.xVel = this.yVel = 0;
-            this.myBulletReset -= this.game.clockTick;
-        }
+        this.xVel = this.speed * Math.cos(this.angle);
+        this.yVel = this.speed * Math.sin(this.angle);
 
 
         if (this.fireTimer > 0)
@@ -50,12 +45,12 @@ class BlobberBoss extends MovingObject {
                 for (var i = 0; i < 7/5; i += 1/5) {
                     new Bullet(this.game,
 								{'x': this.x, 'y': this.y},
-								this.angle - (3/5) + i,
+								this.angle - (3/5) + i - (3.1415/2),
 								150 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
 								8,
 								{x: 0, y: 26, w: 25, h: 25},
 								this,
-								2);
+								10);
                 }
                 this.fireTimer = this.fireRate;
 				//mySound.play();

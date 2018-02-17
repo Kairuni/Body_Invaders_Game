@@ -1,15 +1,13 @@
-const PLAYER_VEL = 400;
+const PLAYER_VEL = 200;
 
 class Ship extends MovingObject {
-
-	//var mySound;
-
     constructor(game, pos) {
         super(game, pos, 40);
 
         this.team = 0;
 
-        this.hp = 100;
+        this.maxHp = 100;
+        this.hp = this.maxHp;
 
         this.fireRate = .2;
         this.fireTimer = 0;
@@ -25,15 +23,21 @@ class Ship extends MovingObject {
 
         this.mySound = new Sound("./assets/Sound/playerLaser.wav");
 
+        this.bulletDamage = 8;
+        this.bulletBuff = 0;
+        this.bulletBuffTimer = -1;
+
+        this.velBuff = 0;
+        this.velBuffTimer = -1;
     }
 
     update() {
-        if (this.game.up) this.yVel = -PLAYER_VEL;
-        else if (this.game.down) this.yVel = PLAYER_VEL;
+        if (this.game.up) this.yVel = -(PLAYER_VEL + this.velBuff);
+        else if (this.game.down) this.yVel = (PLAYER_VEL + this.velBuff);
         else this.yVel = 0;
 
-        if (this.game.left) this.xVel = -PLAYER_VEL;
-        else if (this.game.right) this.xVel = PLAYER_VEL;
+        if (this.game.left) this.xVel = -(PLAYER_VEL + this.velBuff);
+        else if (this.game.right) this.xVel = (PLAYER_VEL + this.velBuff);
         else this.xVel = 0;
 
         if (this.xVel != 0 && this.yVel != 0) {
@@ -50,24 +54,40 @@ class Ship extends MovingObject {
         if (this.fireTimer > 0)
             this.fireTimer -= this.game.clockTick;
 
+        if (this.bulletBuffTimer > 0) {
+            this.bulletBuffTimer -= this.game.clockTick;
+            if (this.bulletBuffTimer <= 0)
+                this.bulletBuff = 0;
+        }
+
+        if (this.velBuffTimer > 0) {
+            this.velBuffTimer -= this.game.clockTick;
+            if (this.velBuffTimer <= 0)
+                this.velBuff = 0;
+        }
+
+
         if (this.fireTimer <= 0) {
             if (this.game.click) {
                 var myBullet1 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle - (3.1415/4)), y: this.y + 34 * Math.sin(this.angle - (3.1415/4))},
 											this.angle,
 											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
-											2,
+											this.bulletBuff > 0 ? 4 : 2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											7);
-                var myBullet1 = new Bullet(this.game,
+											this.bulletDamage,
+                                            this.bulletBuff > 0 ? 2 : 1);
+                var myBullet2 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle + (3.1415/4)), y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
 											this.angle,
 											600 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
-											2,
+											this.bulletBuff > 0 ? 4 : 2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											7);
+											this.bulletDamage,
+                                            this.bulletBuff > 0 ? 2 : 1);
+
                 this.fireTimer = this.fireRate;
 				this.mySound.play();
             }

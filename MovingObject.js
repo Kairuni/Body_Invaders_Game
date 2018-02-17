@@ -102,6 +102,9 @@ class MovingObject extends Entity {
     destroy() {
         this.removeFromWorld = true;
         this.game.partitioner.removeFromGrid(this, this.entityType);
+
+        if (this.team != 0 && Math.random() < .12)
+            new Boost(this.game, {'x': this.x, 'y': this.y});
     }
 
     draw(ctx) {

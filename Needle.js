@@ -45,7 +45,7 @@ class Needle extends Entity {
         if (this.currentCycle == 0) {
             this.cPos = this.travelDistance - 300 - (this.travelDistance * (this.cTime / this.cycleTime));
 
-            console.log(this.cTime);
+            //console.log(this.cTime);
 
             if (this.cTime > this.cycleTime) {
                 var playerShip = new Ship(this.game, {'x': this.x, 'y': this.y});

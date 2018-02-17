@@ -12,8 +12,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDu
     this.reverse = reverse;
 }
 
-Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
-    var scaleBy = scaleBy || 1;
+Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy = 1) {
     this.elapsedTime += tick;
     if (this.loop) {
         if (this.isDone()) {

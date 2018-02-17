@@ -1,5 +1,5 @@
 class Bullet extends MovingObject {
-    constructor(game, pos, angle, speed, radius, imgDims, owner, damage = 5) {
+    constructor(game, pos, angle, speed, radius, imgDims, owner, damage = 5, scaleBy = 1) {
         super(game, pos, radius);
 
         this.xVel = speed * Math.cos(angle);
@@ -10,10 +10,12 @@ class Bullet extends MovingObject {
 		var image = ASSET_MANAGER.getAsset("./assets/Units/Bullets.png");
 		//console.log(imgDims);
 		this.anim = new Animation(image, imgDims.x, imgDims.y, imgDims.w, imgDims.h, 0.15, 1, true, false);
+        this.imgDims = imgDims;
 
         this.owner = owner;
 
         this.dmg = damage;
+        this.scale = scaleBy;
 
         this.team = this.owner.team;
 
@@ -26,7 +28,7 @@ class Bullet extends MovingObject {
     }
 
 	draw(ctx) {
-		this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 12.5, this.screenY() - 12.5);
+		this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - (this.imgDims.w/2) * this.scale, this.screenY() - (this.imgDims.h/2) * this.scale, this.scale);
 		super.draw(ctx);
 	}
 
