@@ -12,6 +12,8 @@ class BlobberBoss extends MovingObject {
         this.fireTimer = 0;
         this.fireRate = 1;
 
+        this.score = 50000;
+
         this.speed = 20;
     }
 
@@ -63,5 +65,7 @@ class BlobberBoss extends MovingObject {
         if (this.myBullet)
             this.myBullet.destroy();
         super.destroy();
+
+        this.game.win = true;
     }
 }

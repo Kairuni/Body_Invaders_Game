@@ -38,6 +38,7 @@ function GameEngine() {
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+    this.score = 0;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -137,6 +138,22 @@ GameEngine.prototype.draw = function () {
         this.ctx.fillRect(0,0,300,20);
         this.ctx.fillStyle = "green";
         this.ctx.fillRect(1, 1, 298 * this.player.hp / this.player.maxHp, 18);
+    }
+
+    this.ctx.font = "40px Arial";
+    this.ctx.fillStyle = "green";
+    this.ctx.fillText("Score: " + this.score, 2, 80);
+
+    if (this.win) {
+        this.ctx.font = "60px Arial";
+        this.ctx.fillStyle = "green";
+        this.ctx.fillText("!YOU WIN!", this.screenWidth/2, this.screenHeight/2);
+
+    } else if (this.player && this.player.hp && this.player.hp <= 0) {
+        this.ctx.font = "60px Arial";
+        this.ctx.fillStyle = "yellow";
+        this.ctx.fillText("!YOU LOST REFRESH TO CONTINUE!", 200, this.screenHeight/2);
+
     }
 
     this.ctx.restore();

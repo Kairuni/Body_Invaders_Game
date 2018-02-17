@@ -17,6 +17,10 @@ class Bacteriophage extends MovingObject {
         this.myBulletTime = 1;
 
         this.speed = 180;
+
+        this.score = 400;
+
+        this.mySound = new Sound("./assets/Sound/bacteriophageNom.wav");
     }
 
     draw(ctx) {
@@ -63,6 +67,7 @@ class Bacteriophage extends MovingObject {
         var bulletPos = {x: this.x + 50 * Math.cos(this.angle), y: this.y + 50 * Math.sin(this.angle)};
 
         if (this.myBulletReset <= 0 && this.myBullet == null) {
+            this.mySound.play();
             this.myBullet = new Bullet(this.game, bulletPos,
                                     this.angle, 0, 20, {x: 0, y: 0, w: 1, h: 1}, this, 20);
             this.myBulletReset = this.myBulletTime;

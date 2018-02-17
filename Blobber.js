@@ -13,6 +13,10 @@ class Blobber extends MovingObject {
         this.fireRate = 2;
 
         this.speed = 20;
+
+        this.score = 200;
+
+        this.mySound = new Sound("./assets/Sound/blobberBloop.wav");
     }
 
     draw(ctx) {
@@ -49,10 +53,10 @@ class Blobber extends MovingObject {
 								4,
 								{x: 26, y: 26, w: 25, h: 25},
 								this,
-								4);
+								2);
                 }
                 this.fireTimer = this.fireRate;
-				//mySound.play();
+				this.mySound.play();
         }
 
         super.update();

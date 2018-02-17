@@ -13,6 +13,10 @@ class Sputnik extends MovingObject {
         this.fireRate = 5;
 
         this.speed = 50;
+
+        this.score = 400;
+
+        this.mySound = new Sound("./assets/Sound/sputnikFwoosh.wav");
     }
 
     draw(ctx) {
@@ -54,8 +58,9 @@ class Sputnik extends MovingObject {
 								2,
 								{x: 76, y: 26, w: 25, h: 25},
 								this,
-								4);
+								3);
                 }
+                this.mySound.play();
                 this.fireTimer = this.fireRate;
 				//mySound.play();
         }

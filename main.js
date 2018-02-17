@@ -36,7 +36,7 @@ ASSET_MANAGER.downloadAll(function () {
 
     levelBuilder(gameEngine, Level1.mapData, Level1.bloodPaths);
 
-    gameEngine.showOutlines = true;
+    //gameEngine.showOutlines = true;
 
     gameEngine.init(ctx);
 

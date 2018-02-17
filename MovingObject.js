@@ -18,6 +18,8 @@ class MovingObject extends Entity {
 
         this.team = team;
 
+        this.score = -100;
+
         if (game)
             game.addEntity(this);
     }
@@ -100,23 +102,29 @@ class MovingObject extends Entity {
     }
 
     destroy() {
-        this.removeFromWorld = true;
-        this.game.partitioner.removeFromGrid(this, this.entityType);
 
-        if (this.team != 0 && Math.random() < .12)
-            new Boost(this.game, {'x': this.x, 'y': this.y});
+        if (!this.removeFromWorld) {
+            this.removeFromWorld = true;
+            this.game.partitioner.removeFromGrid(this, this.entityType);
+            if (this.team != 0 && Math.random() < .12)
+                new Boost(this.game, {'x': this.x, 'y': this.y});
+
+            this.game.score += this.score;
+        }
     }
 
     draw(ctx) {
         Entity.prototype.draw.call(this, ctx);
-        if (this.colliding) {
-            ctx.fillStyle = "Red";
-            ctx.fillRect(this.screenX() - 10, this.screenY() - 10, 20, 20);
+        if (this.game.showOutlines) {
+            if (this.colliding) {
+                ctx.fillStyle = "Red";
+                ctx.fillRect(this.screenX() - 10, this.screenY() - 10, 20, 20);
+            }
+            ctx.strokeStyle = "Green";
+            ctx.beginPath();
+            ctx.moveTo(this.screenX(), this.screenY());
+            ctx.lineTo(this.screenX() + this.radius * Math.cos(this.angle), this.screenY() + this.radius * Math.sin(this.angle));
+            ctx.stroke();
         }
-        ctx.strokeStyle = "Green";
-        ctx.beginPath();
-        ctx.moveTo(this.screenX(), this.screenY());
-        ctx.lineTo(this.screenX() + this.radius * Math.cos(this.angle), this.screenY() + this.radius * Math.sin(this.angle));
-        ctx.stroke();
     }
 }
