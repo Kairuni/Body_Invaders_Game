@@ -23,7 +23,18 @@ Entity.prototype.update = function () {
 }
 
 Entity.prototype.testRange = function() {
-    return Math.abs(this.x - this.game.player.x) > 1700 || Math.abs(this.y - this.game.player.y) > 1000;
+    var case1 = Math.abs(this.x - this.game.player.x) > 1700 || Math.abs(this.y - this.game.player.y) > 1000;
+    var case2 = Math.abs(this.x - this.game.player.x) > 1550 || Math.abs(this.y - this.game.player.y) > 850;
+
+    // Within shooting range of the player
+    if (case2)
+        return 2;
+    // Not within shooting range
+    else if (case1)
+        return 1;
+    // Not within range
+    else
+        return 0;
 }
 
 Entity.prototype.screenX = function() {

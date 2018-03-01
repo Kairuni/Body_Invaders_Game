@@ -35,8 +35,23 @@ class MovingObject extends Entity {
         }
     }
 
+    aimAtPlayer() {
+        var pPos = this.game.player;
+
+        if (Math.abs(pPos.x - this.x) > 30 || Math.abs(pPos.y - this.y) > 30) {
+
+            this.angle = Math.atan2(pPos.x - this.x, this.y - pPos.y) - (3.1415/2) ;
+
+            this.xVel = this.speed * Math.cos(this.angle);
+            this.yVel = this.speed * Math.sin(this.angle);
+        } else {
+            this.xVel = this.yVel = 0;
+            this.myBulletReset -= this.game.clockTick;
+        }
+    }
+
     update(colTest = {ship: true, wall: true, bullet: true}, ignoreRange = false) {
-        if (this.testRange() && !ignoreRange)
+        if (this.testRange() > 1 && !ignoreRange)
             return;
 
         // Remove from partitioner

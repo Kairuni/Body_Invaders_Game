@@ -14,7 +14,7 @@ class BlobberBoss extends MovingObject {
 
         this.score = 50000;
 
-        this.speed = 20;
+        this.speed = 25;
     }
 
     draw(ctx) {
@@ -44,11 +44,11 @@ class BlobberBoss extends MovingObject {
 
         if (this.fireTimer <= 0) {
                 //console.log("Blobber Should Shoot");
-                for (var i = 0; i < 7/5; i += 1/5) {
+                for (var i = 0; i < 14/5; i += 2/5) {
                     new Bullet(this.game,
 								{'x': this.x, 'y': this.y},
-								this.angle - (3/5) + i - (3.1415/2),
-								150 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+								this.angle - (6/5) + i - (3.1415/2),
+								125 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
 								8,
 								{x: 0, y: 26, w: 25, h: 25},
 								this,

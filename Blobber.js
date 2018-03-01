@@ -10,9 +10,9 @@ class Blobber extends MovingObject {
         this.anim = new Animation(image, 0, 451, 150, 150, 0.15, 4, true, false);
 
         this.fireTimer = 0;
-        this.fireRate = 2;
+        this.fireRate = 4;
 
-        this.speed = 20;
+        this.speed = 100;
 
         this.score = 200;
 
@@ -20,7 +20,7 @@ class Blobber extends MovingObject {
     }
 
     draw(ctx) {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 75, this.screenY() - 75);
@@ -29,7 +29,7 @@ class Blobber extends MovingObject {
 
 
     update() {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         var pPos = this.game.player;
@@ -39,24 +39,28 @@ class Blobber extends MovingObject {
         this.xVel = this.speed * Math.cos(this.angle);
         this.yVel = this.speed * Math.sin(this.angle);
 
+        if (this.testRange() == 0) {
 
-        if (this.fireTimer > 0)
-            this.fireTimer -= this.game.clockTick;
+            if (this.fireTimer > 0)
+                this.fireTimer -= this.game.clockTick;
 
-        if (this.fireTimer <= 0) {
-                //console.log("Blobber Should Shoot");
-                for (var i = 0; i < 1; i += 1/5) {
-                    new Bullet(this.game,
-								{'x': this.x, 'y': this.y},
-								this.angle - (2/5) + i - (3.1415/2), // Aim it at the player
-								200 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
-								4,
-								{x: 26, y: 26, w: 25, h: 25},
-								this,
-								2);
-                }
-                this.fireTimer = this.fireRate;
-				this.mySound.play();
+            if (this.fireTimer <= 0) {
+                    //console.log("Blobber Should Shoot");
+                    for (var i = 0; i < 2; i += 2/5) {
+                        new Bullet(this.game,
+    								{'x': this.x, 'y': this.y},
+    								this.angle - (4/5) + i - (3.1415/2), // Aim it at the player
+    								100 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
+    								4,
+    								{x: 26, y: 26, w: 25, h: 25},
+    								this,
+    								2);
+                    }
+                    this.fireTimer = this.fireRate;
+    				this.mySound.play();
+            }
+        } else {
+            super.aimAtPlayer();
         }
 
         super.update();

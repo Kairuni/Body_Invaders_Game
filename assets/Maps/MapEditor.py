@@ -146,7 +146,7 @@ for path in bloodPaths:
         arrayString += "{x: " + str(entry[0]) + ", y: " + str(entry[1]) + "}";
         subFirst = False;
 
-    arrayString += "]"
+    arrayString += "],\n"
     first = False;
 
 arrayString += "]\n";

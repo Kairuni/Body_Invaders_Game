@@ -1,4 +1,4 @@
-const PLAYER_VEL = 200;
+const PLAYER_VEL = 250;
 
 class Ship extends MovingObject {
     constructor(game, pos) {
@@ -18,8 +18,6 @@ class Ship extends MovingObject {
         this.animTime = this.animFrameDuration * this.animFrames;
 
         this.topDownSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 0, w: 100, h: 100}, this.animFrames);
-        this.rightTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 101, w: 100, h: 100}, 1);
-        this.leftTiltSprites = buildRotatedCache("./assets/Units/Allies.png", {x: 0, y: 201, w: 100, h: 100}, 1);
 
         this.mySound = new Sound("./assets/Sound/playerLaser.wav");
 
