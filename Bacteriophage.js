@@ -24,7 +24,7 @@ class Bacteriophage extends MovingObject {
     }
 
     draw(ctx) {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         var cAngle = Math.round(this.angle * (18 / 3.1415));
@@ -48,7 +48,7 @@ class Bacteriophage extends MovingObject {
 
 
     update() {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         var pPos = this.game.player;

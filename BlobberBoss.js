@@ -18,7 +18,7 @@ class BlobberBoss extends MovingObject {
     }
 
     draw(ctx) {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 300, this.screenY() - 300, 2);
@@ -27,7 +27,7 @@ class BlobberBoss extends MovingObject {
 
 
     update() {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         var pPos = this.game.player;

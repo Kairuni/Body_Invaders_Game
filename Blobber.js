@@ -40,7 +40,6 @@ class Blobber extends MovingObject {
         this.yVel = this.speed * Math.sin(this.angle);
 
         if (this.testRange() == 0) {
-
             if (this.fireTimer > 0)
                 this.fireTimer -= this.game.clockTick;
 
@@ -60,6 +59,7 @@ class Blobber extends MovingObject {
     				this.mySound.play();
             }
         } else {
+            console.log("WAT");
             super.aimAtPlayer();
         }
 

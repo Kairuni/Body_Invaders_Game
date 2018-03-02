@@ -24,15 +24,15 @@ Entity.prototype.update = function () {
 
 Entity.prototype.testRange = function() {
     var case1 = Math.abs(this.x - this.game.player.x) > 1700 || Math.abs(this.y - this.game.player.y) > 1000;
-    var case2 = Math.abs(this.x - this.game.player.x) > 1550 || Math.abs(this.y - this.game.player.y) > 850;
+    var case2 = Math.abs(this.x - this.game.player.x) > 700 || Math.abs(this.y - this.game.player.y) > 350;
 
-    // Within shooting range of the player
-    if (case2)
+    // Outside of do anything range
+    if (case1)
         return 2;
     // Not within shooting range
-    else if (case1)
+    else if (case2)
         return 1;
-    // Not within range
+    // Within range
     else
         return 0;
 }

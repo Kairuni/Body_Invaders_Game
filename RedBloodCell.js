@@ -42,7 +42,7 @@ class RedBloodCell extends MovingObject {
     }
 
     draw(ctx) {
-        if (this.testRange())
+        if (this.testRange() > 1)
             return;
 
         this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 50, this.screenY() - 50);
