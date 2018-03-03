@@ -117,7 +117,7 @@ className = filename.split(".")[0];
 
 arrayString = className + " = {};\n";
 
-arrayString += className + ".mapData = [";
+arrayString += className + ".mapData = [\n";
 
 for y in range(h):
     arrayString += "[";

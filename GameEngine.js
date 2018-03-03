@@ -39,6 +39,10 @@ function GameEngine() {
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.score = 0;
+
+    this.bossCount = 0;
+    this.level = -1;
+    this.nextLevelTimer = 5;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -146,15 +150,22 @@ GameEngine.prototype.draw = function () {
     this.ctx.fillStyle = "green";
     this.ctx.fillText("Score: " + this.score, 2, 80);
 
-    if (this.win) {
+    if (this.bossCount == 0 && this.level < Level.maxLevel) {
+        if (this.nextLevelTimer > 0) {
+            this.ctx.font = "60px Arial";
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("TRANSPORTING TO NEW AREA", this.screenWidth/2 - 300, this.screenHeight/2 + 150);
+        }
+
+    } else if (this.bossCount == 0 && this.level == Level.maxLevel) {
         this.ctx.font = "60px Arial";
         this.ctx.fillStyle = "green";
-        this.ctx.fillText("!YOU WIN!", this.screenWidth/2, this.screenHeight/2);
+        this.ctx.fillText("YOU HAVE SAVED THE PRESIDENT", this.screenWidth/2 - 300, this.screenHeight/2 + 150);
 
     } else if (this.player && this.player.hp != null && this.player.hp <= 0) {
         this.ctx.font = "60px Arial";
         this.ctx.fillStyle = "yellow";
-        this.ctx.fillText("!YOU LOST REFRESH TO CONTINUE!", 200, this.screenHeight/2);
+        this.ctx.fillText("YOU LOST - REFRESH TO CONTINUE!", 200, this.screenHeight/2 + 150);
 
     }
 
@@ -188,4 +199,19 @@ GameEngine.prototype.loop = function () {
     this.update();
     this.draw();
     this.space = null;
+
+    if (this.bossCount == 0 && this.level < Level.maxLevel) {
+        if (this.nextLevelTimer <= 0 || this.level == 0)
+            this.nextLevel();
+        else {
+            this.nextLevelTimer -= this.clockTick;
+        }
+    }
+}
+
+
+GameEngine.prototype.nextLevel = function() {
+    this.level += 1;
+    this.nextLevelTimer = 5;
+    levelBuilder(this, Level[this.level].mapData, Level[this.level].bloodPaths);
 }

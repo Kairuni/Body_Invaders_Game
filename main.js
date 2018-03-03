@@ -35,13 +35,15 @@ class Intro extends Entity {
         this.scene = 1;
 
         this.timer = 0;
+        this.game.bossCount = 1;
+        this.game.level = 0;
     }
 
     update() {
         if (!this.pause)
             this.timer += this.game.clockTick;
 
-        if (this.pause && this.game.click)
+        if (this.pause && this.game.click && this.clickUp)
             this.pause = false;
 
         if (!this.game.click)
@@ -86,7 +88,7 @@ class Intro extends Entity {
     }
 
     nextLevelFunction() {
-        levelBuilder(this.game, Level4.mapData, Level4.bloodPaths);
+        this.game.bossCount = 0;
     }
 
 }

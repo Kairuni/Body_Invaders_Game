@@ -33,7 +33,7 @@ class RedBloodCell extends MovingObject {
         } else {
             this.pathIdx += 1;
             if (this.pathIdx >= this.path.length) {
-                this.destroy();
+                this.destroy(false);
                 return;
             }
         }

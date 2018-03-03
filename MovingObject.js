@@ -116,12 +116,12 @@ class MovingObject extends Entity {
         }
     }
 
-    destroy() {
+    destroy(drop = true) {
 
         if (!this.removeFromWorld) {
             this.removeFromWorld = true;
             this.game.partitioner.removeFromGrid(this, this.entityType);
-            if (this.team != 0 && Math.random() < .12)
+            if (this.team != 0 && Math.random() < .12 && drop)
                 new Boost(this.game, {'x': this.x, 'y': this.y});
 
             this.game.score += this.score;

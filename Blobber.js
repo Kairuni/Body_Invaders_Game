@@ -59,7 +59,6 @@ class Blobber extends MovingObject {
     				this.mySound.play();
             }
         } else {
-            console.log("WAT");
             super.aimAtPlayer();
         }
 

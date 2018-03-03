@@ -4,7 +4,7 @@ class Bacteriophage extends MovingObject {
     constructor(game, pos) {
         super(game, pos, BPHAGE_RADIUS);
 
-        this.hp = 160;
+        this.hp = 40;
 
         this.topDownSprites = buildRotatedCache("./assets/Units/Enemies.png", {x: 0, y: 0, w: 150, h: 150}, 4);
         this.animFrames = 4;
@@ -16,7 +16,7 @@ class Bacteriophage extends MovingObject {
         this.myBulletReset = 0;
         this.myBulletTime = 1;
 
-        this.speed = 180;
+        this.speed = 250;
 
         this.score = 400;
 

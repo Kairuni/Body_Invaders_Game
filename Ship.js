@@ -22,11 +22,11 @@ class Ship extends MovingObject {
         this.mySound = new Sound("./assets/Sound/playerLaser.wav");
 
         this.bulletDamage = 8;
-        this.bulletBuff = 0;
-        this.bulletBuffTimer = -1;
+        this.bulletBuff = 0; //300;
+        this.bulletBuffTimer = -1; //600;
 
-        this.velBuff = 0;
-        this.velBuffTimer = -1;
+        this.velBuff = 0; // 200;
+        this.velBuffTimer = 0; // 600;
     }
 
     update() {
@@ -74,7 +74,7 @@ class Ship extends MovingObject {
 											this.bulletBuff > 0 ? 4 : 2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											this.bulletDamage,
+											this.bulletDamage + this.bulletBuff,
                                             this.bulletBuff > 0 ? 2 : 1);
                 var myBullet2 = new Bullet(this.game,
 											{x: this.x + 34 * Math.cos(this.angle + (3.1415/4)), y: this.y + 34 * Math.sin(this.angle + (3.1415/4))},
@@ -83,7 +83,7 @@ class Ship extends MovingObject {
 											this.bulletBuff > 0 ? 4 : 2,
 											{x: 0, y: 0, w: 25, h: 25},
 											this,
-											this.bulletDamage,
+											this.bulletDamage + this.bulletBuff,
                                             this.bulletBuff > 0 ? 2 : 1);
 
                 this.fireTimer = this.fireRate;
@@ -91,7 +91,7 @@ class Ship extends MovingObject {
             }
         }
 
-        super.update();
+        super.update(); //{ship: false, wall: false, bullet: true});
     }
 
     draw(ctx) {

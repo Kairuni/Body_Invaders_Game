@@ -23,8 +23,8 @@ Entity.prototype.update = function () {
 }
 
 Entity.prototype.testRange = function() {
-    var case1 = Math.abs(this.x - this.game.player.x) > 1700 || Math.abs(this.y - this.game.player.y) > 1000;
-    var case2 = Math.abs(this.x - this.game.player.x) > 700 || Math.abs(this.y - this.game.player.y) > 350;
+    var case1 = Math.abs(this.x - this.game.player.x) > 1000 || Math.abs(this.y - this.game.player.y) > 700;
+    var case2 = Math.abs(this.x - this.game.player.x) > 700 || Math.abs(this.y - this.game.player.y) > 325;
 
     // Outside of do anything range
     if (case1)

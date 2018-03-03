@@ -30,7 +30,7 @@ class Boost extends Entity {
                 pShip.velBuff = 200;
                 pShip.velBuffTimer = 15;
             } else if (this.type == 2) {
-                pShip.bulletBuff = 40;
+                pShip.bulletBuff = 10;
                 pShip.bulletBuffTimer = 20;
             }
 
