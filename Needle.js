@@ -25,13 +25,14 @@ class Needle extends Entity {
         super(game, pos, 0);
 
         this.travelDistance = 1000;
-        this.cPos = -this.travelDistance;
         this.cTime = 0;
         this.cycleTime = 1;
         this.currentCycle = 0;
 
         this.img = ASSET_MANAGER.getAsset("./assets/NeedleFull.png");
 
+        this.cPos = this.travelDistance - 300 - (this.travelDistance * (this.cTime / this.cycleTime));
+        this.game.player = this;
         this.game.addEntity(this);
     }
 

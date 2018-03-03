@@ -10,7 +10,7 @@ class Blobber extends MovingObject {
         this.anim = new Animation(image, 0, 451, 150, 150, 0.15, 4, true, false);
 
         this.fireTimer = 0;
-        this.fireRate = 4;
+        this.fireRate = 3;
 
         this.speed = 100;
 

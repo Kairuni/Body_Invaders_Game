@@ -1,4 +1,4 @@
-const PLAYER_VEL = 250;
+const PLAYER_VEL = 225;
 
 class Ship extends MovingObject {
     constructor(game, pos) {

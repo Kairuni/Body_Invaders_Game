@@ -74,6 +74,7 @@ GameEngine.prototype.startInput = function () {
         return { x: x, y: y };
     }
 
+    console.log("Adding keydown");
     this.ctx.canvas.addEventListener("keydown", function (e) {
         if (String.fromCharCode(e.which) === 'W') that.up = true;
         else if (String.fromCharCode(e.which) === 'A') that.left = true;
@@ -85,6 +86,7 @@ GameEngine.prototype.startInput = function () {
         //e.preventDefault();
     }, false);
 
+    console.log("Adding keyup");
     this.ctx.canvas.addEventListener("keyup", function (e) {
         if (String.fromCharCode(e.which) === 'W') that.up = false;
         else if (String.fromCharCode(e.which) === 'A') that.left = false;
