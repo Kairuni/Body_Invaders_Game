@@ -44,10 +44,10 @@ class BlobberBoss extends MovingObject {
 
         if (this.fireTimer <= 0) {
                 //console.log("Blobber Should Shoot");
-                for (var i = 0; i < 14/5; i += 2/5) {
+                for (var i = 0; i < 16/5; i += 2/5) {
                     new Bullet(this.game,
 								{'x': this.x, 'y': this.y},
-								this.angle - (6/5) + i - (3.1415/2),
+								this.angle - (8/5) + i - (3.1415/2),
 								125 + Math.sqrt(this.xVel * this.xVel + this.yVel * this.yVel),
 								8,
 								{x: 0, y: 26, w: 25, h: 25},

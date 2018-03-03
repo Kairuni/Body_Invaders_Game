@@ -10,7 +10,7 @@ class Sputnik extends MovingObject {
         this.anim = new Animation(image, 0, 301, 150, 150, 0.15, 4, true, false);
 
         this.fireTimer = 0;
-        this.fireRate = 10;
+        this.fireRate = 8;
 
         this.speed = 50;
 

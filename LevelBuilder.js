@@ -58,7 +58,6 @@ levelBuilder = function(game, mapArray, bloodPaths) {
                 new BlobberBoss(game, coords);
             } else if (unit == 12) {
                 var playerNeedle = new Needle(game, coords);
-                game.player = playerNeedle;
             }
         }
     }
