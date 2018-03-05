@@ -175,6 +175,7 @@ GameEngine.prototype.draw = function () {
     if (this.resetLevel) {
         this.resetTimer += this.clockTick;
         if (this.resetTimer > 3) {
+            this.bossCount = 0;
             this.resetLevel = false;
             levelBuilder(this, Level[this.level].mapData, Level[this.level].bloodPaths);
         }

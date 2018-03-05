@@ -20,6 +20,7 @@ class SputnikBoss extends MovingObject {
         this.score = 6000;
 
         this.game.bossCount += 1;
+        this.mySound = new Sound("./assets/Sound/sputnikFwoosh.wav");
     }
 
     draw(ctx) {
@@ -71,6 +72,7 @@ class SputnikBoss extends MovingObject {
 								2);
                 }
                 this.fireTimer = this.fireRate;
+                this.mySound.play();
 				//mySound.play();
         }
 
