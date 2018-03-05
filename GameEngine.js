@@ -165,8 +165,19 @@ GameEngine.prototype.draw = function () {
     } else if (this.player && this.player.hp != null && this.player.hp <= 0) {
         this.ctx.font = "60px Arial";
         this.ctx.fillStyle = "yellow";
-        this.ctx.fillText("YOU LOST - REFRESH TO CONTINUE!", 200, this.screenHeight/2 + 150);
+        this.ctx.fillText("YOU LOST - PREPARING A NEW VESSEL FOR KRUBER", 5, this.screenHeight/2 + 150);
 
+        if (!this.resetLevel)
+            this.resetTimer = 0;
+        this.resetLevel = true;
+    }
+
+    if (this.resetLevel) {
+        this.resetTimer += this.clockTick;
+        if (this.resetTimer > 3) {
+            this.resetLevel = false;
+            levelBuilder(this, Level[this.level].mapData, Level[this.level].bloodPaths);
+        }
     }
 
     this.ctx.restore();
