@@ -20,6 +20,10 @@ class MovingObject extends Entity {
 
         this.score = -100;
 
+        this.scale = 1;
+        this.dying = false;
+        this.dyingTimer = 0;
+
         if (game)
             game.addEntity(this);
     }
@@ -53,6 +57,16 @@ class MovingObject extends Entity {
     update(colTest = {ship: true, wall: true, bullet: true}, ignoreRange = false) {
         if (this.testRange() > 1 && !ignoreRange)
             return;
+
+
+        if (this.dying) {
+            this.dyingTimer += this.game.clockTick;
+            this.scale = (1 - this.dyingTimer * 10);
+            if (this.dyingTimer > .10)
+                this.removeFromWorld = true;
+
+            return;
+        }
 
         // Remove from partitioner
         this.game.partitioner.removeFromGrid(this, this.entityType);
@@ -117,9 +131,8 @@ class MovingObject extends Entity {
     }
 
     destroy(drop = true) {
-
-        if (!this.removeFromWorld) {
-            this.removeFromWorld = true;
+        if (!this.dying) {
+            this.dying = true;
             this.game.partitioner.removeFromGrid(this, this.entityType);
             if (this.team != 0 && Math.random() < .12 && drop)
                 new Boost(this.game, {'x': this.x, 'y': this.y});

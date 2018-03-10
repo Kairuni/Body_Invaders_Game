@@ -23,7 +23,7 @@ class BlobberBoss extends MovingObject {
         if (this.testRange() > 1)
             return;
 
-        this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 300, this.screenY() - 300, 2);
+        this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 300 * this.scale, this.screenY() - 300 * this.scale, 2 * this.scale);
         super.draw(ctx);
     }
 
@@ -64,8 +64,9 @@ class BlobberBoss extends MovingObject {
     }
 
     destroy() {
-        if (!this.removeFromWorld)
+        if (!this.removeFromWorld && !this.dying)
             this.game.bossCount -= 1;
+
         super.destroy();
     }
 }

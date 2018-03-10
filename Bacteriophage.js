@@ -35,8 +35,10 @@ class Bacteriophage extends MovingObject {
 
         var animFrame = Math.floor(this.animElapsedTimer/this.animFrameDuration);
 
+        var dims = this.radius * 2 + 2 * ROTATION_BUFFER;
+        //ctx.drawImage(this.topDownSprites[animFrame][cAngle], 0, 0, dims, dims, this.game.screenWidth/2 - (50 + ROTATION_BUFFER) * this.scale, this.game.screenHeight/2 - (50 + ROTATION_BUFFER) * this.scale, dims * this.scale, dims * this.scale);
         //console.log(animFrame);
-        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.screenX() - this.radius - ROTATION_BUFFER, this.screenY() - this.radius - ROTATION_BUFFER);
+        ctx.drawImage(this.topDownSprites[animFrame][cAngle], 0, 0, dims, dims, this.screenX() - (this.radius + ROTATION_BUFFER) * this.scale, this.screenY() - (this.radius + ROTATION_BUFFER) * this.scale, dims * this.scale, dims * this.scale);
 
         this.animElapsedTimer += this.game.clockTick;
 

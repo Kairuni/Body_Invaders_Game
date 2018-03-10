@@ -23,7 +23,7 @@ class Sputnik extends MovingObject {
         if (this.testRange() > 1)
             return;
 
-        this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 75, this.screenY() - 75);
+        this.anim.drawFrame(this.game.clockTick, ctx, this.screenX() - 75 * this.scale, this.screenY() - 75 * this.scale, this.scale);
         super.draw(ctx);
     }
 

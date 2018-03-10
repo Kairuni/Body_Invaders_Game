@@ -104,7 +104,8 @@ class Ship extends MovingObject {
         var animFrame = Math.floor(this.animElapsedTimer/this.animFrameDuration);
 
         //console.log(animFrame);
-        ctx.drawImage(this.topDownSprites[animFrame][cAngle], this.game.screenWidth/2 - 50 - ROTATION_BUFFER, this.game.screenHeight/2 - 50 - ROTATION_BUFFER);
+        var dims = 100 + 2 * ROTATION_BUFFER;
+        ctx.drawImage(this.topDownSprites[animFrame][cAngle], 0, 0, dims, dims, this.game.screenWidth/2 - (50 + ROTATION_BUFFER) * this.scale, this.game.screenHeight/2 - (50 + ROTATION_BUFFER) * this.scale, dims * this.scale, dims * this.scale);
 
         this.animElapsedTimer += this.game.clockTick;
 
