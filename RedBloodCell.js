@@ -20,7 +20,8 @@ class RedBloodCell extends MovingObject {
     }
 
     update() {
-        var nPos = this.path[this.pathIdx];
+        if (!this.dying)
+            var nPos = this.path[this.pathIdx];
 
         //console.log(nPos);
 
